@@ -11,7 +11,6 @@ Pod::Spec.new do |s|
   s.name             = 'UniversalPlistTableView'
   s.version          = '0.1.0'
   s.summary          = 'Universal Plist TableView.'
-
   s.description      = <<-DESC
     Unbelieveable table view, very nice, god damn genius.
                        DESC
@@ -23,16 +22,17 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'UniversalPlistTableView/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'UniversalPlistTableView' => ['UniversalPlistTableView/Assets/*.png']
-  # }
+  s.source_files = 'UniversalPlistTableView/**/*.{h,m,swift}'
+  s.resource = "UniversalPlistTableView/Images.xcassets"
+  s.resource_bundles = {
+    'Resources' => ['UniversalPlistTableView/**/*.{png,xib,plist}']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
   s.dependency 'RxSwift'
+  s.dependency 'RxCocoa'
   s.dependency 'SnapKit'
   
 end

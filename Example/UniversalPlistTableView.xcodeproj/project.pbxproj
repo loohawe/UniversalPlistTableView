@@ -28,9 +28,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		075F4BCFF2AABF5F6D146C48 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		075F4BCFF2AABF5F6D146C48 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		0BD7B94C529853DCF406C736 /* Pods-UniversalPlistTableView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalPlistTableView_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalPlistTableView_Tests/Pods-UniversalPlistTableView_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		12FA3D95365B873BABAB7306 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		12FA3D95365B873BABAB7306 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		2259CD6ECF32BE0B2B054CC3 /* Pods-UniversalPlistTableView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalPlistTableView_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalPlistTableView_Example/Pods-UniversalPlistTableView_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		31BF237FAFF62FFA5033AB59 /* Pods_UniversalPlistTableView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniversalPlistTableView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		322B6EA076C7BACFF81BCECB /* Pods-UniversalPlistTableView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalPlistTableView_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalPlistTableView_Example/Pods-UniversalPlistTableView_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -45,7 +45,7 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		864B2D91522ACA45B3AC8509 /* Pods-UniversalPlistTableView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalPlistTableView_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalPlistTableView_Tests/Pods-UniversalPlistTableView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		B022A3A1CB7B5C3D381B004E /* UniversalPlistTableView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = UniversalPlistTableView.podspec; path = ../UniversalPlistTableView.podspec; sourceTree = "<group>"; };
+		B022A3A1CB7B5C3D381B004E /* UniversalPlistTableView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = UniversalPlistTableView.podspec; path = ../UniversalPlistTableView.podspec; sourceTree = "<group>"; };
 		D42A65E84641A4F2B7F3DC86 /* Pods_UniversalPlistTableView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniversalPlistTableView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -215,10 +215,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 966SKDK4CF;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 966SKDK4CF;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -327,9 +329,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-UniversalPlistTableView_Example/Pods-UniversalPlistTableView_Example-resources.sh",
+				"$PODS_CONFIGURATION_BUILD_DIR/UniversalPlistTableView/Resources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -361,10 +366,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-UniversalPlistTableView_Example/Pods-UniversalPlistTableView_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/UniversalPlistTableView/UniversalPlistTableView.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UniversalPlistTableView.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -467,7 +478,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -513,7 +524,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -526,7 +537,9 @@
 			baseConfigurationReference = 2259CD6ECF32BE0B2B054CC3 /* Pods-UniversalPlistTableView_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 966SKDK4CF;
 				INFOPLIST_FILE = UniversalPlistTableView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -541,7 +554,9 @@
 			baseConfigurationReference = 322B6EA076C7BACFF81BCECB /* Pods-UniversalPlistTableView_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 966SKDK4CF;
 				INFOPLIST_FILE = UniversalPlistTableView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -555,6 +570,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 864B2D91522ACA45B3AC8509 /* Pods-UniversalPlistTableView_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 966SKDK4CF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -576,6 +592,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0BD7B94C529853DCF406C736 /* Pods-UniversalPlistTableView_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 966SKDK4CF;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

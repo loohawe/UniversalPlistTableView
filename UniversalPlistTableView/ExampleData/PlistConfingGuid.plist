@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>headerTitle</key>
+		<string>{&quot;contetn&quot;: &quot;abc&quot;, &quot;fontSize&quot;: &quot;15.0&quot;, &quot;color&quot;: &quot;9090a0&quot;}</string>
+		<key>headerHeight</key>
+		<string>20</string>
+		<key>footerTitle</key>
+		<string>abc</string>
+		<key>footerHeight</key>
+		<string>0.1</string>
+		<key>rows</key>
+		<array>
+			<dict>
+				<key>identifier</key>
+				<string></string>
+				<key>accessoryType</key>
+				<integer>0</integer>
+				<key>height</key>
+				<integer>0</integer>
+				<key>title</key>
+				<string></string>
+				<key>subTitle</key>
+				<string></string>
+				<key>description</key>
+				<string></string>
+				<key>inputText</key>
+				<string></string>
+				<key>inputPlaceHolder</key>
+				<string></string>
+				<key>inputVerificationRegex</key>
+				<string></string>
+				<key>inputVerificationMaxCount</key>
+				<integer>5</integer>
+				<key>inputVerificationDeferedMessage</key>
+				<string></string>
+				<key>commitKey</key>
+				<string></string>
+				<key>leadingIcon</key>
+				<string></string>
+				<key>trailingIcon</key>
+				<string></string>
+				<key>didSelectSegue</key>
+				<string></string>
+				<key>verificationSegue</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+</array>
+</plist>
