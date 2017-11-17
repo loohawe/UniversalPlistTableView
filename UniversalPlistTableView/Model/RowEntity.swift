@@ -14,7 +14,9 @@ public class RowEntity: NSObject {
     public var height: Double = 44.0
     public var rawTitle: String = "" {
         didSet {
-            
+            title = rawTitle.univDerive.content
+            titleFont = rawTitle.univDerive.font
+            titleColor = rawTitle.univDerive.color
         }
     }
     public var title: String = ""
@@ -22,7 +24,9 @@ public class RowEntity: NSObject {
     public var titleColor: UIColor?
     public var rawSubTitle: String = "" {
         didSet {
-            
+            subTitle = rawSubTitle.univDerive.content
+            subTitleFont = rawSubTitle.univDerive.font
+            subTitleColor = rawSubTitle.univDerive.color
         }
     }
     public var subTitle: String = ""
@@ -30,7 +34,9 @@ public class RowEntity: NSObject {
     public var subTitleColor: UIColor?
     public var rawDescription: String = "" {
         didSet {
-            
+            desc = rawDescription.univDerive.content
+            descFont = rawDescription.univDerive.font
+            descColor = rawDescription.univDerive.color
         }
     }
     public var desc: String = ""
@@ -38,7 +44,9 @@ public class RowEntity: NSObject {
     public var descColor: UIColor?
     public var rawInputText: String = "" {
         didSet {
-            
+            inputText = rawInputText.univDerive.content
+            inputTextFont = rawInputText.univDerive.font
+            inputTextColor = rawInputText.univDerive.color
         }
     }
     public var inputText: String = ""
@@ -56,5 +64,38 @@ public class RowEntity: NSObject {
     
     public var date: Date?
     public var indexPath: IndexPath = IndexPath(row: -1, section: -1)
-    public var verifier: ValidatorProtocol?
+    public var verifier: ValidatorProtocol!
+    
+    override public func setValuesForKeys(_ keyedValues: [String : Any]) {
+        
+        var mutableDic = keyedValues
+        accessoryType = UITableViewCellAccessoryType(rawValue: mutableDic.fetchValueAndRemove(withKey: "accessoryType") ?? 0) ?? .none
+        rawTitle = mutableDic.fetchValueAndRemove(withKey: "title") ?? ""
+        rawSubTitle = mutableDic.fetchValueAndRemove(withKey: "subTitle") ?? ""
+        rawDescription = mutableDic.fetchValueAndRemove(withKey: "description") ?? ""
+        rawInputText = mutableDic.fetchValueAndRemove(withKey: "inputText") ?? ""
+        
+        super.setValuesForKeys(mutableDic)
+    }
+    
+    public convenience init(withDictionary dic: [String : Any]) {
+        self.init()
+        setValuesForKeys(dic)
+    }
+}
+
+/// MARK: - Private method
+extension RowEntity {
+    
+    
+}
+
+extension Dictionary where Key == String, Value == Any {
+    mutating func fetchValueAndRemove<ValueType>(withKey key: String) -> ValueType? {
+        if let tmpValue = self[key] as? ValueType {
+            self.removeValue(forKey: key)
+            return tmpValue
+        }
+        return nil
+    }
 }

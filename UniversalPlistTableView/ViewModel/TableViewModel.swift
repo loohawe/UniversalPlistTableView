@@ -78,6 +78,7 @@ extension TableViewModel {
             case .passed: ()
             case .failed(let deferedMsg):
                 self.toastMessage.onNext(deferedMsg)
+                self.toastAtIndexPath.onNext(indexPath)
             }
         }
     }

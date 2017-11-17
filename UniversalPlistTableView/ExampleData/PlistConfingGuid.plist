@@ -4,44 +4,112 @@
 <array>
 	<dict>
 		<key>headerTitle</key>
-		<string>{&quot;contetn&quot;: &quot;abc&quot;, &quot;fontSize&quot;: &quot;15.0&quot;, &quot;color&quot;: &quot;9090a0&quot;}</string>
+		<string>{&quot;content&quot;: &quot;title1&quot;, &quot;fontSize&quot;: 15.0, &quot;color&quot;: &quot;9090a0&quot;}</string>
 		<key>headerHeight</key>
-		<string>20</string>
+		<integer>20</integer>
 		<key>footerTitle</key>
-		<string>abc</string>
+		<string>footer1</string>
 		<key>footerHeight</key>
-		<string>0.1</string>
+		<real>0.1</real>
 		<key>rows</key>
 		<array>
 			<dict>
 				<key>identifier</key>
-				<string></string>
+				<string>TitleInputCell</string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 				<key>height</key>
-				<integer>0</integer>
+				<real>60</real>
 				<key>title</key>
-				<string></string>
+				<string>这是标题</string>
 				<key>subTitle</key>
-				<string></string>
+				<string>这是副标题</string>
 				<key>description</key>
-				<string></string>
+				<string>这个 Cell 的 Description</string>
 				<key>inputText</key>
-				<string></string>
+				<string>输入的文本这这里</string>
 				<key>inputPlaceHolder</key>
-				<string></string>
+				<string>牛逼的占位</string>
 				<key>inputVerificationRegex</key>
-				<string></string>
+				<string>Regular Express String</string>
 				<key>inputVerificationMaxCount</key>
 				<integer>5</integer>
 				<key>inputVerificationDeferedMessage</key>
-				<string></string>
+				<string>错误提示, 你输入的我 TM 不喜欢, 给我改</string>
 				<key>commitKey</key>
-				<string></string>
+				<string>提交的 Key1</string>
 				<key>leadingIcon</key>
-				<string></string>
+				<string>SmallIcon</string>
 				<key>trailingIcon</key>
+				<string>CryIcon</string>
+				<key>didSelectSegue</key>
 				<string></string>
+				<key>verificationSegue</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>identifier</key>
+				<string>TitleInputCell</string>
+				<key>accessoryType</key>
+				<integer>0</integer>
+				<key>height</key>
+				<real>60</real>
+				<key>title</key>
+				<string>这是标题</string>
+				<key>subTitle</key>
+				<string>这是副标题</string>
+				<key>description</key>
+				<string>这个 Cell 的 Description</string>
+				<key>inputText</key>
+				<string>输入的文本这这里</string>
+				<key>inputPlaceHolder</key>
+				<string>牛逼的占位</string>
+				<key>inputVerificationRegex</key>
+				<string>Regular Express String</string>
+				<key>inputVerificationMaxCount</key>
+				<integer>5</integer>
+				<key>inputVerificationDeferedMessage</key>
+				<string>错误提示, 你输入的我 TM 不喜欢, 给我改</string>
+				<key>commitKey</key>
+				<string>提交的 Key1</string>
+				<key>leadingIcon</key>
+				<string>SmallIcon</string>
+				<key>trailingIcon</key>
+				<string>CryIcon</string>
+				<key>didSelectSegue</key>
+				<string></string>
+				<key>verificationSegue</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>identifier</key>
+				<string>TitleInputCell</string>
+				<key>accessoryType</key>
+				<integer>0</integer>
+				<key>height</key>
+				<real>60</real>
+				<key>title</key>
+				<string>这是标题</string>
+				<key>subTitle</key>
+				<string>这是副标题</string>
+				<key>description</key>
+				<string>这个 Cell 的 Description</string>
+				<key>inputText</key>
+				<string>输入的文本这这里</string>
+				<key>inputPlaceHolder</key>
+				<string>牛逼的占位</string>
+				<key>inputVerificationRegex</key>
+				<string>Regular Express String</string>
+				<key>inputVerificationMaxCount</key>
+				<integer>5</integer>
+				<key>inputVerificationDeferedMessage</key>
+				<string>错误提示, 你输入的我 TM 不喜欢, 给我改</string>
+				<key>commitKey</key>
+				<string>提交的 Key1</string>
+				<key>leadingIcon</key>
+				<string>SmallIcon</string>
+				<key>trailingIcon</key>
+				<string>CryIcon</string>
 				<key>didSelectSegue</key>
 				<string></string>
 				<key>verificationSegue</key>

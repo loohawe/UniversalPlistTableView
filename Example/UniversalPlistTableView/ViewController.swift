@@ -30,6 +30,7 @@ class ViewController: UIViewController {
         uniTableView.toastAtIndexPath.map(uniTableView.pickUpRow).subscribe(onNext: { (sec) in
         }).disposed(by: disposeBag)
         
+        
     }
 
     override func didReceiveMemoryWarning() {

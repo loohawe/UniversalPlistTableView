@@ -11,7 +11,9 @@ public class SectionEntity: NSObject {
 
     var rawHeaderTitle: String = "" {
         didSet {
-            
+            headerTitle = rawHeaderTitle.univDerive.content
+            headerTitleFont = rawHeaderTitle.univDerive.font
+            headerTitleColor = rawHeaderTitle.univDerive.color
         }
     }
     var headerTitle: String = ""
@@ -21,7 +23,9 @@ public class SectionEntity: NSObject {
     
     var rawFooterTitle: String = "" {
         didSet {
-            
+            footerTitle = rawFooterTitle.univDerive.content
+            footerTitleFont = rawFooterTitle.univDerive.font
+            footerTitleColor = rawFooterTitle.univDerive.color
         }
     }
     var footerTitle: String = ""
@@ -31,4 +35,25 @@ public class SectionEntity: NSObject {
     
     var section: Int = -1
     var rows: [RowEntity] = []
+    
+    override public func setValuesForKeys(_ keyedValues: [String : Any]) {
+        
+        var mutableDic = keyedValues
+        
+        if let rawTitle = mutableDic["headerTitle"] as? String {
+            rawHeaderTitle = rawTitle
+            mutableDic.removeValue(forKey: "headerTitle")
+        }
+        if let rawFooter = mutableDic["footerTitle"] as? String {
+            rawFooterTitle = rawFooter
+            mutableDic.removeValue(forKey: "footerTitle")
+        }
+        
+        super.setValuesForKeys(mutableDic)
+    }
+    
+    public convenience init(withDictionary dic: [String : Any]) {
+        self.init()
+        setValuesForKeys(dic)
+    }
 }
