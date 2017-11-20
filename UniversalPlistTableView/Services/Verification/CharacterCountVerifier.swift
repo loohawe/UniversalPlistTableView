@@ -24,6 +24,10 @@ public class CharacterCountVerifier: ValidatorProtocol {
         count = rowModel.inputVerificationMaxCount
         needVerify.map(verify).bind(to: verificationResult).disposed(by: disposeBag)
     }
+    
+    deinit {
+        print("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
+    }
 }
 
 // MARK: - Private method
@@ -35,7 +39,7 @@ extension CharacterCountVerifier {
         }
         
         if model.inputText.count > count {
-            return .failed(model.inputVerificationDeferedMessage)
+            return .failed(model)
         } else {
             return .passed
         }

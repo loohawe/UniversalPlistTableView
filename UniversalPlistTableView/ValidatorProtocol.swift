@@ -10,7 +10,7 @@ import RxSwift
 
 public enum VerificationResult {
     case passed
-    case failed(String)
+    case failed(RowEntity)
 }
 
 public protocol ValidatorProtocol {
@@ -28,4 +28,7 @@ public protocol ValidatorProtocol {
 
 extension ValidatorProtocol {
     
+    public func bindVerification() {
+        //valueChanged.bind(to: needVerify).disposed(by: disposeBag)
+    }
 }

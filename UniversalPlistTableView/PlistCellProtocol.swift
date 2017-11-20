@@ -13,7 +13,7 @@ public protocol PlistCellProtocol {
     /// In
     /// Assign viewModel to Cell
     /// 给 Cell 赋值 viewModel
-    var cellModel: Variable<RowEntity>! { get set }
+    var cellModel: Variable<RowEntity> { get set }
     
     /// Out
     /// Send signal when cell input has changed

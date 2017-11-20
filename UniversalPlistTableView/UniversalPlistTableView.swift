@@ -35,10 +35,10 @@ public class UniversalPlistTableView: UIView {
     public let selectIndexPath: PublishSubject<IndexPath> = PublishSubject()
 
     // MARK: - Private Property
-    private let disposeBag: DisposeBag = DisposeBag()
-    private let tableViewModel: TableViewModel = TableViewModel()
-    private var plistHelper: PlistHelper!
-    private var tableView: UITableView {
+    fileprivate let disposeBag: DisposeBag = DisposeBag()
+    fileprivate let tableViewModel: TableViewModel = TableViewModel()
+    fileprivate var plistHelper: PlistHelper!
+    fileprivate var tableView: UITableView {
         return tableViewModel.tableView
     }
     
@@ -52,10 +52,14 @@ public class UniversalPlistTableView: UIView {
         super.init(coder: aDecoder)
         privateInit()
     }
+    
+    deinit {
+        print("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
+    }
 }
 
 // MARK: - Public Method
-extension UniversalPlistTableView {
+public extension UniversalPlistTableView {
     
     /// Fetch commint dictionary informattion
     /// 提交 TableView 中的信息
@@ -78,8 +82,8 @@ extension UniversalPlistTableView {
     
     /// Regist verification
     /// 注册验证逻辑
-    public func regist(verificationClass aVerification: ValidatorProtocol, forSegue segue: String) {
-        
+    public func regist<VerifierType>(verificationClass aVerification: VerifierType.Type, forSegue segue: String) where VerifierType: ValidatorProtocol {
+        tableViewModel.regist(verificationClass: aVerification, forSegue: segue)
     }
 }
 
@@ -87,7 +91,7 @@ extension UniversalPlistTableView {
 extension UniversalPlistTableView {
     
     fileprivate func privateInit() {
-        tableViewModel.toastAtIndexPath.bind(to: toastAtIndexPath).disposed(by: disposeBag)
+        tableViewModel.cellToastAtIndexPath.bind(to: toastAtIndexPath).disposed(by: disposeBag)
         addSubview(tableViewModel.tableView)
         tableViewModel.tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()

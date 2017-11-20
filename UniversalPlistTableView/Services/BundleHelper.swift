@@ -15,9 +15,14 @@ class BundleHelper: NSObject {
     }
     
     static func resourcesBundle() -> Bundle? {
+        //return Bundle(for: BundleHelper.self)
         if let bundleURL = resourceBundleURL() {
             return Bundle(url: bundleURL)
         }
         return nil
+    }
+    
+    deinit {
+        print("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
     }
 }

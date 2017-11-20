@@ -9,18 +9,22 @@ import UIKit
 
 internal class PlistHelper {
     
-    var rawDictionary: [String : Any] = [:]
+    var rawDictionaryList: [[String : Any]] = []
 
     init(plist plistName: String, inBundle bundle: Bundle?) throws {
         let `bundle` = bundle ?? Bundle.main
         guard let plistPath = bundle.path(forResource: plistName, ofType: "plist") else {
             throw PlistErrors.plistContentUncorrect
         }
-        let dic = NSDictionary(contentsOfFile: plistPath)
-        guard let swiftDic = dic as? [String : Any] else {
+        let array = NSArray(contentsOfFile: plistPath)
+        guard let swiftList = array as? [[String : Any]] else {
             throw PlistErrors.plistContentUncorrect
         }
-        rawDictionary = swiftDic
+        rawDictionaryList = swiftList
+    }
+    
+    deinit {
+        print("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
     }
 }
 
@@ -28,14 +32,18 @@ internal class PlistHelper {
 extension PlistHelper {
     
     public func getSectionList() -> [SectionEntity] {
-        return buildModels(from: rawDictionary)
+        return buildModels(from: rawDictionaryList)
     }
 }
 
 // MARK: - Private Method
 extension PlistHelper {
     
-    fileprivate func buildModels(from dictionary: [String : Any]) -> [SectionEntity] {
-        return []
+    fileprivate func buildModels(from dictionaryList: [[String : Any]]) -> [SectionEntity] {
+        var secList: [SectionEntity] = []
+        dictionaryList.forEach { (itemDic) in
+            secList.append(SectionEntity(withDictionary: itemDic))
+        }
+        return secList
     }
 }

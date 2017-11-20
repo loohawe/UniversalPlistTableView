@@ -24,4 +24,8 @@ public class EmptyVerifier: ValidatorProtocol {
             .bind(to: verificationResult)
             .disposed(by: disposeBag)
     }
+    
+    deinit {
+        print("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
+    }
 }

@@ -6,7 +6,7 @@
 		<key>headerTitle</key>
 		<string>{&quot;content&quot;: &quot;title1&quot;, &quot;fontSize&quot;: 15.0, &quot;color&quot;: &quot;9090a0&quot;}</string>
 		<key>headerHeight</key>
-		<integer>20</integer>
+		<real>20</real>
 		<key>footerTitle</key>
 		<string>footer1</string>
 		<key>footerHeight</key>
@@ -19,7 +19,7 @@
 				<key>accessoryType</key>
 				<integer>0</integer>
 				<key>height</key>
-				<real>60</real>
+				<integer>60</integer>
 				<key>title</key>
 				<string>这是标题</string>
 				<key>subTitle</key>
@@ -45,7 +45,7 @@
 				<key>didSelectSegue</key>
 				<string></string>
 				<key>verificationSegue</key>
-				<string></string>
+				<string>characterCountVerify</string>
 			</dict>
 			<dict>
 				<key>identifier</key>
@@ -79,7 +79,7 @@
 				<key>didSelectSegue</key>
 				<string></string>
 				<key>verificationSegue</key>
-				<string></string>
+				<string>characterCountVerify</string>
 			</dict>
 			<dict>
 				<key>identifier</key>

@@ -13,6 +13,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		752134891FBED1EE00507FC5 /* PlistConfingGuid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 752134881FBED1ED00507FC5 /* PlistConfingGuid.plist */; };
 		F137A86D0E1F25941267694B /* Pods_UniversalPlistTableView_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31BF237FAFF62FFA5033AB59 /* Pods_UniversalPlistTableView_Tests.framework */; };
 		FD185526C1026DA331F862CC /* Pods_UniversalPlistTableView_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42A65E84641A4F2B7F3DC86 /* Pods_UniversalPlistTableView_Example.framework */; };
 /* End PBXBuildFile section */
@@ -44,6 +45,7 @@
 		607FACE51AFB9204008FA782 /* UniversalPlistTableView_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UniversalPlistTableView_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		752134881FBED1ED00507FC5 /* PlistConfingGuid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlistConfingGuid.plist; sourceTree = SOURCE_ROOT; };
 		864B2D91522ACA45B3AC8509 /* Pods-UniversalPlistTableView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UniversalPlistTableView_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UniversalPlistTableView_Tests/Pods-UniversalPlistTableView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		B022A3A1CB7B5C3D381B004E /* UniversalPlistTableView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = UniversalPlistTableView.podspec; path = ../UniversalPlistTableView.podspec; sourceTree = "<group>"; };
 		D42A65E84641A4F2B7F3DC86 /* Pods_UniversalPlistTableView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UniversalPlistTableView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				752134881FBED1ED00507FC5 /* PlistConfingGuid.plist */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -251,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				752134891FBED1EE00507FC5 /* PlistConfingGuid.plist in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
@@ -330,7 +334,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-UniversalPlistTableView_Example/Pods-UniversalPlistTableView_Example-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/UniversalPlistTableView/Resources.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/UniversalPlistTableView/Resources.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (

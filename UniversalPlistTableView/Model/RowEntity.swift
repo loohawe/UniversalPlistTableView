@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 public class RowEntity: NSObject {
     
-    public var identifier: String = ""
+    @objc public var identifier: String = ""
     public var accessoryType: UITableViewCellAccessoryType = .none
     public var height: Double = 44.0
     public var rawTitle: String = "" {
@@ -19,9 +21,9 @@ public class RowEntity: NSObject {
             titleColor = rawTitle.univDerive.color
         }
     }
-    public var title: String = ""
-    public var titleFont: UIFont?
-    public var titleColor: UIColor?
+    @objc public var title: String = ""
+    @objc public var titleFont: UIFont?
+    @objc public var titleColor: UIColor?
     public var rawSubTitle: String = "" {
         didSet {
             subTitle = rawSubTitle.univDerive.content
@@ -29,9 +31,9 @@ public class RowEntity: NSObject {
             subTitleColor = rawSubTitle.univDerive.color
         }
     }
-    public var subTitle: String = ""
-    public var subTitleFont: UIFont?
-    public var subTitleColor: UIColor?
+    @objc public var subTitle: String = ""
+    @objc public var subTitleFont: UIFont?
+    @objc public var subTitleColor: UIColor?
     public var rawDescription: String = "" {
         didSet {
             desc = rawDescription.univDerive.content
@@ -39,9 +41,9 @@ public class RowEntity: NSObject {
             descColor = rawDescription.univDerive.color
         }
     }
-    public var desc: String = ""
-    public var descFont: UIFont?
-    public var descColor: UIColor?
+    @objc public var desc: String = ""
+    @objc public var descFont: UIFont?
+    @objc public var descColor: UIColor?
     public var rawInputText: String = "" {
         didSet {
             inputText = rawInputText.univDerive.content
@@ -49,18 +51,18 @@ public class RowEntity: NSObject {
             inputTextColor = rawInputText.univDerive.color
         }
     }
-    public var inputText: String = ""
-    public var inputTextFont: UIFont?
-    public var inputTextColor: UIColor?
-    public var inputPlaceHolder: String = ""
-    public var inputVerificationRegex: String = ""
-    public var inputVerificationMaxCount: Int = -1
-    public var inputVerificationDeferedMessage: String = ""
-    public var commitKey: String = ""
-    public var leadingIcon: String = ""
-    public var trailingIcon: String = ""
-    public var didSelectSegue: String = ""
-    public var verificationSegue: String = ""
+    @objc public var inputText: String = ""
+    @objc public var inputTextFont: UIFont?
+    @objc public var inputTextColor: UIColor?
+    @objc public var inputPlaceHolder: String = ""
+    @objc public var inputVerificationRegex: String = ""
+    @objc public var inputVerificationMaxCount: Int = -1
+    @objc public var inputVerificationDeferedMessage: String = ""
+    @objc public var commitKey: String = ""
+    @objc public var leadingIcon: String = ""
+    @objc public var trailingIcon: String = ""
+    @objc public var didSelectSegue: String = ""
+    @objc public var verificationSegue: String = ""
     
     public var date: Date?
     public var indexPath: IndexPath = IndexPath(row: -1, section: -1)
@@ -75,12 +77,41 @@ public class RowEntity: NSObject {
         rawDescription = mutableDic.fetchValueAndRemove(withKey: "description") ?? ""
         rawInputText = mutableDic.fetchValueAndRemove(withKey: "inputText") ?? ""
         
+        if let tmpHeight: Double = mutableDic.fetchValueAndRemove(withKey: "height") {
+            height = tmpHeight
+        } else if let tmpHeight: Int = mutableDic.fetchValueAndRemove(withKey: "height") {
+            height = Double(tmpHeight)
+        }
+        
         super.setValuesForKeys(mutableDic)
+    }
+    
+    override init() {
+        super.init()
+        verifier = EmptyVerifier(withRowModel: self)
     }
     
     public convenience init(withDictionary dic: [String : Any]) {
         self.init()
         setValuesForKeys(dic)
+        
+        if verificationSegue.isEmpty {
+            verifier = EmptyVerifier(withRowModel: self)
+        } else {
+            guard let verifierTypes = TableViewModel.verifierTypes,
+                let veType = verifierTypes[verificationSegue] else {
+                    fatalError("🐱🐱🐱现在 verificationSegue 并没有注册, 需要调用 regist(verificationClass aVerification: VerifierType.Type, forSegue segue: String) 进行注册.")
+            }
+            if let verifierType = veType as? ValidatorProtocol.Type {
+                verifier = verifierType.init(withRowModel: self)
+            } else {
+                verifier = EmptyVerifier(withRowModel: self)
+            }
+        }
+    }
+    
+    deinit {
+        print("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
     }
 }
 
@@ -89,6 +120,39 @@ extension RowEntity {
     
     
 }
+
+//extension Reactive where Base: RowEntity {
+//
+//    public var inputText: EntityInOut<String?> {
+//        return inputTextValue
+//    }
+//
+//
+//    public var inputTextValue: EntityInOut<String?> {
+//        return EntityInOut()
+//    }
+//
+//    public func entityInOut<T>(getter: @escaping (Base) -> T, setter: @escaping (Base, T) -> ()) {
+//
+//    }
+//}
+//
+//public struct EntityInOut<PropertyType> : EntityInOutType {
+//
+//    public typealias E = PropertyType
+//
+//    public func subscribe<O>(_ observer: O) -> Disposable where O : ObserverType, PropertyType == O.E {
+//
+//    }
+//
+//    public func on(_ event: Event<PropertyType>) {
+//
+//    }
+//}
+//
+//public protocol EntityInOutType : ObservableType, ObserverType {
+//
+//}
 
 extension Dictionary where Key == String, Value == Any {
     mutating func fetchValueAndRemove<ValueType>(withKey key: String) -> ValueType? {

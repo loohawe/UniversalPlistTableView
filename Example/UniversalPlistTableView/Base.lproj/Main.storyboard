@@ -29,7 +29,7 @@
                                     <action selector="commitInfoAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MO2-q7-Dce"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujc-cR-ess">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujc-cR-ess" customClass="UniversalPlistTableView" customModule="UniversalPlistTableView">
                                 <rect key="frame" x="16" y="110" width="343" height="537"/>
                                 <color key="backgroundColor" red="0.6616094065197744" green="0.89171060601760166" blue="0.92149044689119175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -37,18 +37,25 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ujc-cR-ess" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="1Vt-bA-POK"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="ujc-cR-ess" secondAttribute="bottom" constant="20" id="Lvt-hN-CPf"/>
                             <constraint firstItem="u0r-Qk-5zu" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Mod-nn-n6p"/>
+                            <constraint firstItem="ujc-cR-ess" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="S8P-oL-zkl"/>
                             <constraint firstItem="ujc-cR-ess" firstAttribute="top" secondItem="u0r-Qk-5zu" secondAttribute="bottom" constant="8" id="Z0I-jd-uyw"/>
                             <constraint firstItem="ujc-cR-ess" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="bfb-Db-U9H"/>
                             <constraint firstItem="u0r-Qk-5zu" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="vCK-UV-DPN"/>
+                            <constraint firstItem="ujc-cR-ess" firstAttribute="top" secondItem="u0r-Qk-5zu" secondAttribute="bottom" constant="8" id="vOS-Dd-eKx"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="ujc-cR-ess" secondAttribute="bottom" constant="20" id="wyF-lv-u2c"/>
+                            <constraint firstItem="ujc-cR-ess" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="yLq-5q-Dyy"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="67F-p2-21f"/>
+                    <connections>
+                        <outlet property="uniTableView" destination="ujc-cR-ess" id="qbQ-02-ijX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="364" y="28.335832083958024"/>
+            <point key="canvasLocation" x="1151" y="-143"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="em2-wF-5SU">
@@ -61,12 +68,44 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="aY7-Ax-z3k"/>
+                        <segue destination="7do-DK-dog" kind="relationship" relationship="rootViewController" id="pcf-u9-qme"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mo6-I4-VCn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-446" y="21"/>
+            <point key="canvasLocation" x="-777" y="-143"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="MxF-YP-3ag">
+            <objects>
+                <viewController id="7do-DK-dog" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9Pl-Ju-hJQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="KrQ-vV-KIK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bai-fu-upP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXb-XJ-Vlu">
+                                <rect key="frame" x="16" y="72" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <segue destination="vXZ-lx-hvc" kind="show" id="Hq3-1d-Jr1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="eXb-XJ-Vlu" firstAttribute="leading" secondItem="bai-fu-upP" secondAttribute="leadingMargin" id="OvP-3l-99x"/>
+                            <constraint firstItem="eXb-XJ-Vlu" firstAttribute="top" secondItem="9Pl-Ju-hJQ" secondAttribute="bottom" constant="8" id="lrO-SI-gEm"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="EmQ-h3-Nhl"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bml-Ap-81R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="201" y="-143"/>
         </scene>
     </scenes>
 </document>

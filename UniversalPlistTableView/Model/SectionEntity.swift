@@ -19,7 +19,7 @@ public class SectionEntity: NSObject {
     var headerTitle: String = ""
     var headerTitleFont: UIFont?
     var headerTitleColor: UIColor?
-    var sectionHeight: Double = 0.0
+    var headerHeight: Double = 0.0
     
     var rawFooterTitle: String = "" {
         didSet {
@@ -48,6 +48,23 @@ public class SectionEntity: NSObject {
             rawFooterTitle = rawFooter
             mutableDic.removeValue(forKey: "footerTitle")
         }
+        headerHeight = mutableDic.fetchValueAndRemove(withKey: "headerHeight") ?? 0.0
+        if let intHeight: Int = mutableDic.fetchValueAndRemove(withKey: "sectionHeight") {
+            headerHeight = Double(intHeight)
+        }
+        
+        footerHeight = mutableDic.fetchValueAndRemove(withKey: "footerHeight") ?? 0.0
+        if let intHeight: Int = mutableDic.fetchValueAndRemove(withKey: "footerHeight") {
+            footerHeight = Double(intHeight)
+        }
+        
+        if let rowsList: [[String : Any]] = mutableDic.fetchValueAndRemove(withKey: "rows") {
+            var tmpRows: [RowEntity] = []
+            rowsList.forEach({ (rowItem) in
+                tmpRows.append(RowEntity(withDictionary: rowItem))
+            })
+            rows = tmpRows
+        }
         
         super.setValuesForKeys(mutableDic)
     }
@@ -55,5 +72,9 @@ public class SectionEntity: NSObject {
     public convenience init(withDictionary dic: [String : Any]) {
         self.init()
         setValuesForKeys(dic)
+    }
+    
+    deinit {
+        print("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
     }
 }
