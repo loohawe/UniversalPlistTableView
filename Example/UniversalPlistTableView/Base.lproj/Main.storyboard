@@ -55,7 +55,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1151" y="-143"/>
+            <point key="canvasLocation" x="-1193" y="730"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="em2-wF-5SU">
@@ -75,10 +75,10 @@
             </objects>
             <point key="canvasLocation" x="-777" y="-143"/>
         </scene>
-        <!--View Controller-->
+        <!--Enter View Controller-->
         <scene sceneID="MxF-YP-3ag">
             <objects>
-                <viewController id="7do-DK-dog" sceneMemberID="viewController">
+                <viewController id="7do-DK-dog" customClass="EnterViewController" customModule="UniversalPlistTableView_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Pl-Ju-hJQ"/>
                         <viewControllerLayoutGuide type="bottom" id="KrQ-vV-KIK"/>
@@ -88,16 +88,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXb-XJ-Vlu">
-                                <rect key="frame" x="16" y="72" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="16" y="72" width="108" height="30"/>
+                                <state key="normal" title="Push TableView"/>
                                 <connections>
                                     <segue destination="vXZ-lx-hvc" kind="show" id="Hq3-1d-Jr1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ep-B7-lDQ">
+                                <rect key="frame" x="16" y="110" width="31" height="30"/>
+                                <state key="normal" title="KVO"/>
+                                <connections>
+                                    <segue destination="uPP-3w-i5Q" kind="show" id="SlY-bN-A8f"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="1Ep-B7-lDQ" firstAttribute="top" secondItem="eXb-XJ-Vlu" secondAttribute="bottom" constant="8" id="2In-Ou-Sou"/>
                             <constraint firstItem="eXb-XJ-Vlu" firstAttribute="leading" secondItem="bai-fu-upP" secondAttribute="leadingMargin" id="OvP-3l-99x"/>
+                            <constraint firstItem="1Ep-B7-lDQ" firstAttribute="leading" secondItem="bai-fu-upP" secondAttribute="leadingMargin" id="kRx-y0-8U7"/>
                             <constraint firstItem="eXb-XJ-Vlu" firstAttribute="top" secondItem="9Pl-Ju-hJQ" secondAttribute="bottom" constant="8" id="lrO-SI-gEm"/>
                         </constraints>
                     </view>
@@ -106,6 +115,67 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bml-Ap-81R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="201" y="-143"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="YqJ-m0-RRD">
+            <objects>
+                <viewController id="uPP-3w-i5Q" customClass="KVOViewController" customModule="UniversalPlistTableView_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="j27-pN-oBp"/>
+                        <viewControllerLayoutGuide type="bottom" id="WS9-kK-VIa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eMg-DD-fdA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bNJ-sC-4Js">
+                                <rect key="frame" x="16" y="72" width="77" height="30"/>
+                                <state key="normal" title="Hei Hei Hei"/>
+                                <connections>
+                                    <action selector="heiHeiHeiAction:" destination="uPP-3w-i5Q" eventType="touchUpInside" id="zFj-os-JDU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfG-Wf-Yai">
+                                <rect key="frame" x="16" y="110" width="92" height="30"/>
+                                <state key="normal" title="Show Hei Hei"/>
+                                <connections>
+                                    <action selector="showHeiHeiHeiAction:" destination="uPP-3w-i5Q" eventType="touchUpInside" id="9ww-ac-HMt"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Holder" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cqd-nf-srB">
+                                <rect key="frame" x="101" y="72" width="258" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0J-IY-Lt7">
+                                <rect key="frame" x="116" y="110" width="70" height="30"/>
+                                <state key="normal" title="Set Model"/>
+                                <connections>
+                                    <action selector="setModelAction:" destination="uPP-3w-i5Q" eventType="touchUpInside" id="hc1-td-k7H"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="B0J-IY-Lt7" firstAttribute="leading" secondItem="hfG-Wf-Yai" secondAttribute="trailing" constant="8" id="4Ff-4S-ZEh"/>
+                            <constraint firstItem="cqd-nf-srB" firstAttribute="trailing" secondItem="eMg-DD-fdA" secondAttribute="trailingMargin" id="9X6-hg-vUV"/>
+                            <constraint firstItem="bNJ-sC-4Js" firstAttribute="leading" secondItem="eMg-DD-fdA" secondAttribute="leadingMargin" id="BPs-05-AnT"/>
+                            <constraint firstItem="hfG-Wf-Yai" firstAttribute="top" secondItem="bNJ-sC-4Js" secondAttribute="bottom" constant="8" id="NeV-dQ-7rq"/>
+                            <constraint firstItem="bNJ-sC-4Js" firstAttribute="top" secondItem="j27-pN-oBp" secondAttribute="bottom" constant="8" id="QDF-bd-Unu"/>
+                            <constraint firstItem="hfG-Wf-Yai" firstAttribute="leading" secondItem="eMg-DD-fdA" secondAttribute="leadingMargin" id="dTc-gP-zhy"/>
+                            <constraint firstItem="cqd-nf-srB" firstAttribute="leading" secondItem="bNJ-sC-4Js" secondAttribute="trailing" constant="8" id="gMm-DR-H7P"/>
+                            <constraint firstItem="B0J-IY-Lt7" firstAttribute="top" secondItem="cqd-nf-srB" secondAttribute="bottom" constant="8" id="hsG-xO-AHb"/>
+                            <constraint firstItem="cqd-nf-srB" firstAttribute="top" secondItem="j27-pN-oBp" secondAttribute="bottom" constant="8" id="j93-ZN-5GE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="inputSomthing" destination="cqd-nf-srB" id="TTm-tS-pts"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mhv-FV-fcj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-276" y="729.98500749625191"/>
         </scene>
     </scenes>
 </document>

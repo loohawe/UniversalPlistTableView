@@ -10,16 +10,8 @@ import RxSwift
 
 public protocol PlistCellProtocol {
     
-    /// In
-    /// Assign viewModel to Cell
-    /// 给 Cell 赋值 viewModel
-    var cellModel: Variable<RowEntity> { get set }
-    
-    /// Out
-    /// Send signal when cell input has changed
-    /// 当 cell 的提交值改变的时候, 触发此信号
-    var valueChanged: PublishSubject<RowEntity> { get set }
-    var disposeBag: DisposeBag { get set }
+    /// Cell bind to cellModel
+    func bindCellModel(_ model: RowEntity) -> Void
 }
 
 /// Cell helper method

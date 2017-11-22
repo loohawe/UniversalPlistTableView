@@ -10,25 +10,16 @@ import RxSwift
 
 public enum VerificationResult {
     case passed
-    case failed(RowEntity)
+    case failed
 }
 
-public protocol ValidatorProtocol {
-    
-    /// In
-    var needVerify: PublishSubject<RowEntity> { get set }
-    
-    /// Out
-    var verificationResult: Variable<VerificationResult> { get set }
-    var disposeBag: DisposeBag { get set }
-    
-    /// Function
-    init(withRowModel rowModel: RowEntity)
+public protocol ValidatorType {
+    func verify(cellModel model: RowEntity) -> VerificationResult
 }
 
-extension ValidatorProtocol {
-    
-    public func bindVerification() {
-        //valueChanged.bind(to: needVerify).disposed(by: disposeBag)
+extension ValidatorType {
+    public func verify(cellModel model: RowEntity) -> VerificationResult {
+        return .passed
     }
 }
+

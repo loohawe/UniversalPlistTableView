@@ -33,7 +33,7 @@ internal class TableViewModel: NSObject {
     }()
     
     /// MARK: - Private property
-    static var verifierTypes: [String : Any]?
+    static var verifierTypes: [String : ValidatorType] = [:]
     var disposeBag: DisposeBag = DisposeBag()
     
     
@@ -45,7 +45,7 @@ internal class TableViewModel: NSObject {
     
     deinit {
         print("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
-        TableViewModel.verifierTypes = nil
+        TableViewModel.verifierTypes = [:]
     }
 }
 
@@ -71,14 +71,10 @@ extension TableViewModel: UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let rowModel = pickupRow(indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: rowModel.identifier, for: indexPath)
-        guard var plistCell = cell as? PlistCellProtocol else {
+        guard let plistCell = cell as? PlistCellProtocol else {
             fatalError("🐼🐼🐼UniversalPlistTableViewCell must coform protocol: PlistCellProtocol\n🐼🐼🐼我的超级牛逼无敌 Plist table view 注册的 Cell 必须实现协议 PlistCellProtocol, 不实现就不让你用哟, 我的哥")
         }
-        plistCell.cellModel.value = rowModel
-        
-//        rowModel.verifier.verificationResult.asObservable()
-//            .subscribe(onNext: bindVerifier(at: indexPath))
-//            .disposed(by: plistCell.disposeBag)
+        plistCell.bindCellModel(rowModel)
         return cell
     }
 }
@@ -88,11 +84,8 @@ extension TableViewModel {
     
     /// Regist verification
     /// 注册验证逻辑
-    public func regist<VerifierType>(verificationClass aVerification: VerifierType.Type, forSegue segue: String) where VerifierType: ValidatorProtocol {
-        if TableViewModel.verifierTypes == nil {
-            TableViewModel.verifierTypes = [:]
-        }
-        TableViewModel.verifierTypes![segue] = aVerification
+    public func regist<VerifierType>(verificationClass aVerification: VerifierType, forSegue segue: String) where VerifierType: ValidatorType {
+        TableViewModel.verifierTypes[segue] = aVerification
     }
 }
 
@@ -100,7 +93,7 @@ extension TableViewModel {
 extension TableViewModel {
     
     fileprivate func privateInit() {
-        regist(verificationClass: CharacterCountVerifier.self, forSegue: "characterCountVerify")
+        regist(verificationClass: CharacterCountVerifier(), forSegue: "characterCountVerify")
     }
     
     fileprivate func pickupRow(_ indexPath: IndexPath) -> RowEntity {
@@ -109,34 +102,26 @@ extension TableViewModel {
         return sectionList[indexPath.section].rows[indexPath.row]
     }
     
-    fileprivate func bindVerifier(at indexPath: IndexPath) -> ((VerificationResult) -> Void) {
-        return { [weak self] verification in
-            guard let `self` = self else { return }
-            switch verification {
-            case .passed: ()
-            case .failed:
-                self.cellToastAtIndexPath.onNext(indexPath)
-            }
-        }
-    }
-    
     fileprivate func oberverRowModel(inSections sec: [SectionEntity]) {
         sec.forEach { (secItem) in
             secItem.rows.forEach({ (rowItem) in
-                rowItem.verifier.verificationResult.asObservable()
-                    .filter{ result in
-                        if case .failed(_) = result {
-                            return true
-                        } else {
-                            return false
-                        }
-                    }
-                    .map({ (failed) -> IndexPath in
-                        guard case .failed(let rowModel) = failed else { fatalError() }
-                        return rowModel.indexPath
-                    })
-                    .bind(to: cellToastAtIndexPath)
-                    .disposed(by: disposeBag)
+                rowItem.rx.inputText.subscribe(onNext: { (inputStr) in
+                    print("****************\(inputStr)")
+                }).disposed(by: disposeBag)
+//                rowItem.verifier.verificationResult.asObservable()
+//                    .filter{ result in
+//                        if case .failed(_) = result {
+//                            return true
+//                        } else {
+//                            return false
+//                        }
+//                    }
+//                    .map({ (failed) -> IndexPath in
+//                        guard case .failed(let rowModel) = failed else { fatalError() }
+//                        return rowModel.indexPath
+//                    })
+//                    .bind(to: cellToastAtIndexPath)
+//                    .disposed(by: disposeBag)
             })
         }
     }

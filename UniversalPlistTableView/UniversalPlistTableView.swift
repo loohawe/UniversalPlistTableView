@@ -82,7 +82,7 @@ public extension UniversalPlistTableView {
     
     /// Regist verification
     /// 注册验证逻辑
-    public func regist<VerifierType>(verificationClass aVerification: VerifierType.Type, forSegue segue: String) where VerifierType: ValidatorProtocol {
+    public func regist<VerifierType>(verificationClass aVerification: VerifierType, forSegue segue: String) where VerifierType: ValidatorType {
         tableViewModel.regist(verificationClass: aVerification, forSegue: segue)
     }
 }

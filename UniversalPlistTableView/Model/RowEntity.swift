@@ -7,7 +7,6 @@
 
 import UIKit
 import RxSwift
-import RxCocoa
 
 public class RowEntity: NSObject {
     
@@ -21,7 +20,7 @@ public class RowEntity: NSObject {
             titleColor = rawTitle.univDerive.color
         }
     }
-    @objc public var title: String = ""
+    @objc dynamic public var title: String = ""
     @objc public var titleFont: UIFont?
     @objc public var titleColor: UIColor?
     public var rawSubTitle: String = "" {
@@ -31,7 +30,7 @@ public class RowEntity: NSObject {
             subTitleColor = rawSubTitle.univDerive.color
         }
     }
-    @objc public var subTitle: String = ""
+    @objc dynamic public var subTitle: String = ""
     @objc public var subTitleFont: UIFont?
     @objc public var subTitleColor: UIColor?
     public var rawDescription: String = "" {
@@ -41,7 +40,7 @@ public class RowEntity: NSObject {
             descColor = rawDescription.univDerive.color
         }
     }
-    @objc public var desc: String = ""
+    @objc dynamic public var desc: String = ""
     @objc public var descFont: UIFont?
     @objc public var descColor: UIColor?
     public var rawInputText: String = "" {
@@ -51,22 +50,21 @@ public class RowEntity: NSObject {
             inputTextColor = rawInputText.univDerive.color
         }
     }
-    @objc public var inputText: String = ""
+    @objc dynamic public var inputText: String = ""
     @objc public var inputTextFont: UIFont?
     @objc public var inputTextColor: UIColor?
     @objc public var inputPlaceHolder: String = ""
     @objc public var inputVerificationRegex: String = ""
     @objc public var inputVerificationMaxCount: Int = -1
     @objc public var inputVerificationDeferedMessage: String = ""
-    @objc public var commitKey: String = ""
+    @objc dynamic public var commitKey: String = ""
     @objc public var leadingIcon: String = ""
     @objc public var trailingIcon: String = ""
     @objc public var didSelectSegue: String = ""
     @objc public var verificationSegue: String = ""
     
-    public var date: Date?
+    @objc dynamic public var date: Date?
     public var indexPath: IndexPath = IndexPath(row: -1, section: -1)
-    public var verifier: ValidatorProtocol!
     
     override public func setValuesForKeys(_ keyedValues: [String : Any]) {
         
@@ -86,28 +84,13 @@ public class RowEntity: NSObject {
         super.setValuesForKeys(mutableDic)
     }
     
-    override init() {
+    override public init() {
         super.init()
-        verifier = EmptyVerifier(withRowModel: self)
     }
     
     public convenience init(withDictionary dic: [String : Any]) {
         self.init()
         setValuesForKeys(dic)
-        
-        if verificationSegue.isEmpty {
-            verifier = EmptyVerifier(withRowModel: self)
-        } else {
-            guard let verifierTypes = TableViewModel.verifierTypes,
-                let veType = verifierTypes[verificationSegue] else {
-                    fatalError("🐱🐱🐱现在 verificationSegue 并没有注册, 需要调用 regist(verificationClass aVerification: VerifierType.Type, forSegue segue: String) 进行注册.")
-            }
-            if let verifierType = veType as? ValidatorProtocol.Type {
-                verifier = verifierType.init(withRowModel: self)
-            } else {
-                verifier = EmptyVerifier(withRowModel: self)
-            }
-        }
     }
     
     deinit {
@@ -115,44 +98,15 @@ public class RowEntity: NSObject {
     }
 }
 
-/// MARK: - Private method
+// MARK: - Private method
 extension RowEntity {
-    
     
 }
 
-//extension Reactive where Base: RowEntity {
-//
-//    public var inputText: EntityInOut<String?> {
-//        return inputTextValue
-//    }
-//
-//
-//    public var inputTextValue: EntityInOut<String?> {
-//        return EntityInOut()
-//    }
-//
-//    public func entityInOut<T>(getter: @escaping (Base) -> T, setter: @escaping (Base, T) -> ()) {
-//
-//    }
-//}
-//
-//public struct EntityInOut<PropertyType> : EntityInOutType {
-//
-//    public typealias E = PropertyType
-//
-//    public func subscribe<O>(_ observer: O) -> Disposable where O : ObserverType, PropertyType == O.E {
-//
-//    }
-//
-//    public func on(_ event: Event<PropertyType>) {
-//
-//    }
-//}
-//
-//public protocol EntityInOutType : ObservableType, ObserverType {
-//
-//}
+// MARK: - Public method
+extension RowEntity {
+    
+}
 
 extension Dictionary where Key == String, Value == Any {
     mutating func fetchValueAndRemove<ValueType>(withKey key: String) -> ValueType? {

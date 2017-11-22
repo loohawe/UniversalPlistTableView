@@ -9,39 +9,18 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-public class CharacterCountVerifier: ValidatorProtocol {
+public struct CharacterCountVerifier: ValidatorType {
     
-    /// In
-    public var needVerify: PublishSubject<RowEntity> = PublishSubject()
-    
-    /// Out
-    public var verificationResult: Variable<VerificationResult> = Variable(.passed)
-    public var disposeBag: DisposeBag = DisposeBag()
-    
-    var count: Int
-    
-    required public init(withRowModel rowModel: RowEntity) {
-        count = rowModel.inputVerificationMaxCount
-        needVerify.map(verify).bind(to: verificationResult).disposed(by: disposeBag)
-    }
-    
-    deinit {
-        print("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
-    }
-}
-
-// MARK: - Private method
-extension CharacterCountVerifier {
-    
-    fileprivate func verify(_ model: RowEntity) -> VerificationResult {
-        if count < 0 {
+    public func verify(cellModel model: RowEntity) -> VerificationResult {
+        if model.inputVerificationMaxCount < 0 {
             return .passed
         }
         
-        if model.inputText.count > count {
-            return .failed(model)
-        } else {
-            return .passed
+        if model.inputText.count > model.inputVerificationMaxCount {
+            return .failed
         }
+        
+        return .passed
     }
+    
 }
