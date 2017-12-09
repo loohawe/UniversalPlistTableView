@@ -24,6 +24,8 @@ internal class TableViewModel: NSObject {
         }
     }
     
+    internal var didSelectCell: PublishSubject<RowEntity> = PublishSubject()
+    
     internal let tableView: UITableView = {
         let tempTable: UITableView = UITableView(frame: CGRect.zero, style: .grouped)
         let cellNib = UINib(nibName: "TitleInputCell", bundle: BundleHelper.resourcesBundle())
@@ -33,7 +35,7 @@ internal class TableViewModel: NSObject {
     }()
     
     /// MARK: - Private property
-    static var verifierTypes: [String : ValidatorType] = [:]
+    static var verifiers: [String : ValidatorType] = [:]
     var disposeBag: DisposeBag = DisposeBag()
     
     
@@ -45,7 +47,7 @@ internal class TableViewModel: NSObject {
     
     deinit {
         print("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
-        TableViewModel.verifierTypes = [:]
+        TableViewModel.verifiers = [:]
     }
 }
 
@@ -55,6 +57,11 @@ extension TableViewModel: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let rowModel = pickupRow(indexPath)
         return CGFloat(rowModel.height)
+    }
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let rowMode = pickupRow(indexPath)
+        didSelectCell.onNext(rowMode)
     }
 }
 
@@ -85,7 +92,7 @@ extension TableViewModel {
     /// Regist verification
     /// 注册验证逻辑
     public func regist<VerifierType>(verificationClass aVerification: VerifierType, forSegue segue: String) where VerifierType: ValidatorType {
-        TableViewModel.verifierTypes[segue] = aVerification
+        TableViewModel.verifiers[segue] = aVerification
     }
 }
 
@@ -108,20 +115,6 @@ extension TableViewModel {
                 rowItem.rx.inputText.subscribe(onNext: { (inputStr) in
                     print("****************\(inputStr)")
                 }).disposed(by: disposeBag)
-//                rowItem.verifier.verificationResult.asObservable()
-//                    .filter{ result in
-//                        if case .failed(_) = result {
-//                            return true
-//                        } else {
-//                            return false
-//                        }
-//                    }
-//                    .map({ (failed) -> IndexPath in
-//                        guard case .failed(let rowModel) = failed else { fatalError() }
-//                        return rowModel.indexPath
-//                    })
-//                    .bind(to: cellToastAtIndexPath)
-//                    .disposed(by: disposeBag)
             })
         }
     }

@@ -32,7 +32,12 @@ public class UniversalPlistTableView: UIView {
     
     /// Did selected indexpath
     /// 选中某个 cell
-    public let selectIndexPath: PublishSubject<IndexPath> = PublishSubject()
+    public var selectIndexPath: PublishSubject<RowEntity> {
+        return tableViewModel.didSelectCell
+    }
+    
+    public var valueChanged: PublishSubject<RowEntity> = PublishSubject()
+    public var valueChangedFilted: PublishSubject<RowEntity> = PublishSubject()
 
     // MARK: - Private Property
     fileprivate let disposeBag: DisposeBag = DisposeBag()
@@ -40,6 +45,9 @@ public class UniversalPlistTableView: UIView {
     fileprivate var plistHelper: PlistHelper!
     fileprivate var tableView: UITableView {
         return tableViewModel.tableView
+    }
+    fileprivate var sectionList: [SectionEntity] {
+        return tableViewModel.sectionList
     }
     
     // MARK: - Life cycle
@@ -72,6 +80,9 @@ public extension UniversalPlistTableView {
     public func install(plist plistName: String, inBundle bundle: Bundle?) throws {
         plistHelper = try PlistHelper(plist: plistName, inBundle: bundle)
         tableViewModel.sectionList = plistHelper.getSectionList()
+        
+        sectionList.valueChanged.bind(to: valueChanged).disposed(by: disposeBag)
+        sectionList.valueChangedVerifyPassed(inVerificaitons: TableViewModel.verifiers).bind(to: valueChangedFilted).disposed(by: disposeBag)
     }
     
     /// Regist Cell

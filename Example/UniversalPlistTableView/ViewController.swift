@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import UniversalPlistTableView
 import SnapKit
+import RxCocoa
 
 class ViewController: UIViewController {
     
@@ -34,6 +35,14 @@ class ViewController: UIViewController {
         
         uniTableView.toastAtIndexPath.subscribe(onNext: { (indexPath) in
             print(indexPath)
+        }).disposed(by: disposeBag)
+        
+        uniTableView.valueChanged.subscribe(onNext: { (rowItem) in
+            print("all============\(rowItem)")
+        }).disposed(by: disposeBag)
+        
+        uniTableView.valueChangedFilted.subscribe(onNext: { (rowItem) in
+            print("success================\(rowItem)")
         }).disposed(by: disposeBag)
         
         
