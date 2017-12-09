@@ -72,7 +72,11 @@ public extension UniversalPlistTableView {
     /// Fetch commint dictionary informattion
     /// 提交 TableView 中的信息
     public func extractCommitInfomation() -> [String : Any] {
-        return [:]
+        var result: [String : Any] = [:]
+        sectionList.flatMap { $0.rows }.forEach { (row) in
+            result[row.commitKey] = row.inputText
+        }
+        return result
     }
     
     /// Setup SourceData from plist
@@ -89,6 +93,10 @@ public extension UniversalPlistTableView {
     /// 注册新的 cell
     public func regist<CellType>(cellClass aCell: CellType.Type, forIdentifier identifier: String) where CellType: UITableViewCell, CellType: PlistCellProtocol {
         tableView.register(aCell, forCellReuseIdentifier: identifier)
+    }
+    
+    public func regist(_ nib: UINib?, forIdentifier identifier: String) {
+        tableView.register(nib, forCellReuseIdentifier: identifier)
     }
     
     /// Regist verification
