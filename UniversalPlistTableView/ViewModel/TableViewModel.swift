@@ -63,6 +63,17 @@ extension TableViewModel: UITableViewDelegate {
         let rowMode = pickupRow(indexPath)
         didSelectCell.onNext(rowMode)
     }
+    
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let sec = sectionList[section]
+        return CGFloat(sec.headerHeight)
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let sec = sectionList[section]
+        return CGFloat(sec.footerHeight)
+    }
+    
 }
 
 extension TableViewModel: UITableViewDataSource {
@@ -83,6 +94,16 @@ extension TableViewModel: UITableViewDataSource {
         }
         plistCell.bindCellModel(rowModel)
         return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let sec = sectionList[section]
+        return sec.headerTitle
+    }
+    
+    public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        let sec = sectionList[section]
+        return sec.footerTitle
     }
 }
 

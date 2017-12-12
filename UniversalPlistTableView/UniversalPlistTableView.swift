@@ -38,17 +38,18 @@ public class UniversalPlistTableView: UIView {
     
     public var valueChanged: PublishSubject<RowEntity> = PublishSubject()
     public var valueChangedFilted: PublishSubject<RowEntity> = PublishSubject()
+    
+    public var tableView: UITableView {
+        return tableViewModel.tableView
+    }
+    public var sectionList: [SectionEntity] {
+        return tableViewModel.sectionList
+    }
 
     // MARK: - Private Property
     fileprivate let disposeBag: DisposeBag = DisposeBag()
     fileprivate let tableViewModel: TableViewModel = TableViewModel()
     fileprivate var plistHelper: PlistHelper!
-    fileprivate var tableView: UITableView {
-        return tableViewModel.tableView
-    }
-    fileprivate var sectionList: [SectionEntity] {
-        return tableViewModel.sectionList
-    }
     
     // MARK: - Life cycle
     public override init(frame: CGRect) {
