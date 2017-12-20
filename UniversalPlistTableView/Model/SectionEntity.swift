@@ -9,32 +9,32 @@ import UIKit
 
 public class SectionEntity: NSObject {
 
-    var rawHeaderTitle: String = "" {
+    public var rawHeaderTitle: String = "" {
         didSet {
             headerTitle = rawHeaderTitle.univDerive.content
             headerTitleFont = rawHeaderTitle.univDerive.font
             headerTitleColor = rawHeaderTitle.univDerive.color
         }
     }
-    var headerTitle: String = ""
-    var headerTitleFont: UIFont?
-    var headerTitleColor: UIColor?
-    var headerHeight: Double = 0.0
+    public var headerTitle: String = ""
+    public var headerTitleFont: UIFont?
+    public var headerTitleColor: UIColor?
+    public var headerHeight: Double = 0.0
     
-    var rawFooterTitle: String = "" {
+    public var rawFooterTitle: String = "" {
         didSet {
             footerTitle = rawFooterTitle.univDerive.content
             footerTitleFont = rawFooterTitle.univDerive.font
             footerTitleColor = rawFooterTitle.univDerive.color
         }
     }
-    var footerTitle: String = ""
-    var footerTitleFont: UIFont?
-    var footerTitleColor: UIColor?
-    var footerHeight: Double = 0.0
+    public var footerTitle: String = ""
+    public var footerTitleFont: UIFont?
+    public var footerTitleColor: UIColor?
+    public var footerHeight: Double = 0.0
     
-    var section: Int = -1
-    var rows: [RowEntity] = []
+    public var section: Int = -1
+    public var rows: [RowEntity] = []
     
     override public func setValuesForKeys(_ keyedValues: [String : Any]) {
         

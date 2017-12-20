@@ -139,4 +139,19 @@ extension TableViewModel {
             })
         }
     }
+    
+    /// 观察 Section 里的事件, 对相关事件做必要订阅
+    fileprivate func observeSetionList(_ secList: [SectionEntity]) {
+        if secList.isEmpty { return }
+        
+        /// 验证不通过, 通知 cell
+        secList
+            .valueChangedVerifyFailed(inVerificaitons: TableViewModel.verifiers)
+            .subscribe(onNext: { (rowItem) in
+                if let cellItem = self.tableView.cellForRow(at: rowItem.indexPath) {
+                    
+                }
+            })
+            .disposed(by: disposeBag)
+    }
 }

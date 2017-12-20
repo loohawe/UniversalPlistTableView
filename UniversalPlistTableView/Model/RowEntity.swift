@@ -8,8 +8,14 @@
 import UIKit
 import RxSwift
 
+public protocol CustomEntityType { }
+public struct EmptyCustomEntity: CustomEntityType { }
+
+/// Cell model
+/// Cell 对应的 Model
 public class RowEntity: NSObject {
     
+    /// Plist data
     @objc public var identifier: String = ""
     public var accessoryType: UITableViewCellAccessoryType = .none
     public var height: Double = 44.0
@@ -53,6 +59,8 @@ public class RowEntity: NSObject {
     @objc dynamic public var inputText: String = ""
     @objc public var inputTextFont: UIFont?
     @objc public var inputTextColor: UIColor?
+    @objc public var isRequired: Bool = false
+    @objc public var keyboardType: UIKeyboardType = .default
     @objc public var inputPlaceHolder: String = ""
     @objc public var inputVerificationRegex: String = ""
     @objc public var inputVerificationMaxCount: Int = -1
@@ -63,9 +71,14 @@ public class RowEntity: NSObject {
     @objc public var didSelectSegue: String = ""
     @objc public var verificationSegue: String = ""
     
+    /// Custom property
+    /// 有些 cell 要存日期, 用这个属性
     @objc dynamic public var date: Date?
+    /// 用户自定义数据, 比如用来控制颜色或者其他
+    public var customControl: CustomEntityType = EmptyCustomEntity()
     public var indexPath: IndexPath = IndexPath(row: -1, section: -1)
     
+    /// Life cycle
     override public func setValuesForKeys(_ keyedValues: [String : Any]) {
         
         var mutableDic = keyedValues
@@ -79,6 +92,11 @@ public class RowEntity: NSObject {
             height = tmpHeight
         } else if let tmpHeight: Int = mutableDic.fetchValueAndRemove(withKey: "height") {
             height = Double(tmpHeight)
+        }
+        
+        if let keybdTypeInt: Int = mutableDic.fetchValueAndRemove(withKey: "keyboardType"),
+            let keyT = UIKeyboardType(rawValue: keybdTypeInt) {
+            keyboardType = keyT
         }
         
         super.setValuesForKeys(mutableDic)

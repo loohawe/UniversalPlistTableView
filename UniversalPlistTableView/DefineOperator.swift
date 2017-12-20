@@ -17,8 +17,10 @@ precedencegroup BidirectionalBindPrecedence {
 infix operator <--==-->: BidirectionalBindPrecedence
 
 public func <--==--><ValueType>(left: ControlProperty<ValueType>, right: EntityInOut<ValueType>) -> Disposable {
-    let disposeToRight = left.bind(to: right)
-    let disposeToLeft = right.bind(to: left)
+    let disposeToLeft = right
+        .bind(to: left)
+    let disposeToRight = left
+        .bind(to: right)
     return CombinedDisposables(withDisposes: [disposeToRight, disposeToLeft])
 }
 

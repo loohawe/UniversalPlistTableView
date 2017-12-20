@@ -35,6 +35,11 @@ extension TitleInputCell: PlistCellProtocol {
             .bind(to: titleLabel.rx.text)
             .disposed(by: disposeBag)
         
+//        (model.rx.inputText)
+//            .debug()
+//            .bind(to: inputTextField.rx.text)
+//            .disposed(by: disposeBag)
+        
         (inputTextField.rx.text <--==--> model.rx.inputText)
             .disposed(by: disposeBag)
         

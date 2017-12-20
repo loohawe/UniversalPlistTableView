@@ -11,7 +11,11 @@ import RxSwift
 public protocol PlistCellProtocol {
     
     /// Cell bind to cellModel
+    /// 从这里你要 Bind 相关属性到你的 Cell 上
     func bindCellModel(_ model: RowEntity) -> Void
+    
+    func updateCell(withCustomProperty property: CustomEntityType) -> Void
+    
 }
 
 /// Cell helper method
@@ -19,6 +23,10 @@ public protocol PlistCellProtocol {
 /// 几乎涵盖了所有 RowEntity 的属性
 /// 不要再写 Cell.titleLabel.text = cellModel.title 之类的方法啦 >_<
 extension PlistCellProtocol {
+    
+    public func updateCell(withCustomProperty property: CustomEntityType) -> Void {
+        
+    }
     
     private func assignText(model: RowEntity, modelKey: String) -> ((UILabel) -> Void) {
         return { label in
