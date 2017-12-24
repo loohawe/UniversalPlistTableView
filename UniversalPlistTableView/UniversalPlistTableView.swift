@@ -10,9 +10,14 @@ import RxSwift
 import RxCocoa
 import SnapKit
 
-public typealias RowEntityHandle = (RowEntity) -> Void
-
 public let CONST_titleInputCellIdentifier = "titleInputCellIdentifier"
+
+public var VAR_DebugPrint: Bool = true
+internal func debugPrint(_ message: String) {
+    if VAR_DebugPrint {
+        print(message)
+    }
+}
 
 public class UniversalPlistTableView: UIView {
 
@@ -45,6 +50,9 @@ public class UniversalPlistTableView: UIView {
     public var sectionList: [SectionEntity] {
         return tableViewModel.sectionList
     }
+    public var dataCenter: TableViewDataCenter {
+        return tableViewModel.dataCenter
+    }
 
     // MARK: - Private Property
     fileprivate let disposeBag: DisposeBag = DisposeBag()
@@ -63,7 +71,7 @@ public class UniversalPlistTableView: UIView {
     }
     
     deinit {
-        print("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
+        debugPrint("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
     }
 }
 
@@ -84,10 +92,11 @@ public extension UniversalPlistTableView {
     /// 从 plist 设置数据源
     public func install(plist plistName: String, inBundle bundle: Bundle?) throws {
         plistHelper = try PlistHelper(plist: plistName, inBundle: bundle)
-        tableViewModel.sectionList = plistHelper.getSectionList()
+        tableViewModel.dataCenter.sectionList = plistHelper.getSectionList()
+        tableViewModel.reloadData()
         
         sectionList.valueChanged.bind(to: valueChanged).disposed(by: disposeBag)
-        sectionList.valueChangedVerifyPassed(inVerificaitons: TableViewModel.verifiers).bind(to: valueChangedFilted).disposed(by: disposeBag)
+        sectionList.valueChangedVerifyPassed(inVerificaitons: dataCenter.verifiers).bind(to: valueChangedFilted).disposed(by: disposeBag)
     }
     
     /// Regist Cell
@@ -117,4 +126,9 @@ extension UniversalPlistTableView {
             make.edges.equalToSuperview()
         }
     }
+}
+
+// MARK: - FindRowEntityAbility 能找到相应的 Cell entity
+extension UniversalPlistTableView: FindRowEntityAbility {
+    public func getDataCenter() -> TableViewDataCenter { return dataCenter }
 }

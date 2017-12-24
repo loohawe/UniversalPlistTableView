@@ -7,4 +7,6 @@
 
 import UIKit
 
-public struct EmptyVerifier: ValidatorType {}
+/// 空的验证器哟
+public struct EmptyVerifier: ValidatorType {
+}

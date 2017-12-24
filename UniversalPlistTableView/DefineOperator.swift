@@ -21,6 +21,7 @@ public func <--==--><ValueType>(left: ControlProperty<ValueType>, right: EntityI
         .bind(to: left)
     let disposeToRight = left
         .bind(to: right)
+    
     return CombinedDisposables(withDisposes: [disposeToRight, disposeToLeft])
 }
 

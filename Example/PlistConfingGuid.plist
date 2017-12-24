@@ -27,7 +27,7 @@
 				<key>description</key>
 				<string>这个 Cell 的 Description</string>
 				<key>inputText</key>
-				<string>输入的文本这这里</string>
+				<string>1234</string>
 				<key>isRequired</key>
 				<integer>1</integer>
 				<key>keyboardType</key>
@@ -39,7 +39,7 @@
 				<key>inputVerificationMaxCount</key>
 				<integer>5</integer>
 				<key>inputVerificationDeferedMessage</key>
-				<string>错误提示, 你输入的我 TM 不喜欢, 给我改</string>
+				<string>错误提示, 输入验证不通过</string>
 				<key>commitKey</key>
 				<string>name</string>
 				<key>leadingIcon</key>
@@ -77,9 +77,9 @@
 				<key>inputVerificationMaxCount</key>
 				<integer>5</integer>
 				<key>inputVerificationDeferedMessage</key>
-				<string>错误提示, 你输入的我 TM 不喜欢, 给我改</string>
+				<string>错误提示, 输入验证不通过</string>
 				<key>commitKey</key>
-				<string>提交的 Key1</string>
+				<string>age</string>
 				<key>leadingIcon</key>
 				<string>SmallIcon</string>
 				<key>trailingIcon</key>
@@ -87,7 +87,7 @@
 				<key>didSelectSegue</key>
 				<string></string>
 				<key>verificationSegue</key>
-				<string>characterCountVerify</string>
+				<string></string>
 			</dict>
 			<dict>
 				<key>identifier</key>
@@ -115,7 +115,7 @@
 				<key>inputVerificationMaxCount</key>
 				<integer>5</integer>
 				<key>inputVerificationDeferedMessage</key>
-				<string>错误提示, 你输入的我 TM 不喜欢, 给我改</string>
+				<string>错误提示, 输入验证不通过</string>
 				<key>commitKey</key>
 				<string>提交的 Key1</string>
 				<key>leadingIcon</key>
@@ -166,7 +166,7 @@
 				<key>inputVerificationMaxCount</key>
 				<integer>5</integer>
 				<key>inputVerificationDeferedMessage</key>
-				<string>错误提示, 你输入的我 TM 不喜欢, 给我改</string>
+				<string>错误提示, 输入验证不通过</string>
 				<key>commitKey</key>
 				<string>提交的 Key1</string>
 				<key>leadingIcon</key>
@@ -176,7 +176,7 @@
 				<key>didSelectSegue</key>
 				<string></string>
 				<key>verificationSegue</key>
-				<string>characterCountVerify</string>
+				<string></string>
 			</dict>
 			<dict>
 				<key>identifier</key>
@@ -204,7 +204,7 @@
 				<key>inputVerificationMaxCount</key>
 				<integer>5</integer>
 				<key>inputVerificationDeferedMessage</key>
-				<string>错误提示, 你输入的我 TM 不喜欢, 给我改</string>
+				<string>错误提示, 输入验证不通过</string>
 				<key>commitKey</key>
 				<string>提交的 Key1</string>
 				<key>leadingIcon</key>
@@ -214,7 +214,7 @@
 				<key>didSelectSegue</key>
 				<string></string>
 				<key>verificationSegue</key>
-				<string>characterCountVerify</string>
+				<string></string>
 			</dict>
 			<dict>
 				<key>identifier</key>
@@ -242,7 +242,7 @@
 				<key>inputVerificationMaxCount</key>
 				<integer>5</integer>
 				<key>inputVerificationDeferedMessage</key>
-				<string>错误提示, 你输入的我 TM 不喜欢, 给我改</string>
+				<string>错误提示, 输入验证不通过</string>
 				<key>commitKey</key>
 				<string>提交的 Key1</string>
 				<key>leadingIcon</key>

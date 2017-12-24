@@ -8,18 +8,14 @@
 import UIKit
 import RxSwift
 
-public enum VerificationResult {
-    case passed
-    case failed
-}
 
 public protocol ValidatorType {
-    func verify(cellModel model: RowEntity) -> VerificationResult
+    func verify(cellModel model: RowEntity) -> Bool
 }
 
 extension ValidatorType {
-    public func verify(cellModel model: RowEntity) -> VerificationResult {
-        return .passed
+    public func verify(cellModel model: RowEntity) -> Bool {
+        return true
     }
 }
 

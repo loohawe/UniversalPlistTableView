@@ -14,14 +14,31 @@ import RxCocoa
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var uniTableView: UniversalPlistTableView!
+    @IBOutlet weak var tableView: UniversalPlistTableView!
     var disposeBag: DisposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        try! uniTableView.install(plist: "PlistConfingGuid", inBundle: nil)
+        try! tableView.install(plist: "PlistConfingGuid", inBundle: nil)
         
+        tableView.indexPath(IndexPath.init(row: 0, section: 0)).clickHandle { [unowned self] (rowEntity) in
+            debugPrint("\(rowEntity.title)")
+            self.tableView.indexPath(IndexPath.init(row: 1, section: 0)).title = "沃的天"
+        }
+        
+        let rowEntity = tableView.key("name")
+        rowEntity.verifyFailedHandle(\RowEntity.inputText) { (previousCurrentValue, nowValue, row) in
+            debugPrint("\n\(previousCurrentValue)\n\(nowValue)\n\(row)\n")
+        }
+        
+        tableView.key("age").clickHandle { [unowned self] (row) in
+            self.tableView.key("name").inputText = "abcdef"
+        }
+        
+        
+        
+        /**
         /// 配置 Cell
         uniTableView.configRowModel.subscribe(onNext: { (rowEntity) in
             rowEntity.title = "luhao"
@@ -43,18 +60,13 @@ class ViewController: UIViewController {
         
         uniTableView.valueChangedFilted.subscribe(onNext: { (rowItem) in
             print("success================\(rowItem)")
-        }).disposed(by: disposeBag)
+        }).disposed(by: disposeBag) **/
         
         
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func commitInfoAction(_ sender: UIButton) {
-        print(uniTableView.extractCommitInfomation())
+        debugPrint(tableView.extractCommitInfomation())
     }
 }
 

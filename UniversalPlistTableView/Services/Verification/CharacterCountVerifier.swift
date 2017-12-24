@@ -11,16 +11,15 @@ import RxCocoa
 
 public struct CharacterCountVerifier: ValidatorType {
     
-    public func verify(cellModel model: RowEntity) -> VerificationResult {
+    public func verify(cellModel model: RowEntity) -> Bool {
         if model.inputVerificationMaxCount < 0 {
-            return .passed
+            return true
         }
         
         if model.inputText.count > model.inputVerificationMaxCount {
-            return .failed
+            return false
         }
         
-        return .passed
+        return true
     }
-    
 }

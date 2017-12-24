@@ -56,6 +56,7 @@ public class RowEntity: NSObject {
             inputTextColor = rawInputText.univDerive.color
         }
     }
+    internal var preCurrectInputText: String = ""
     @objc dynamic public var inputText: String = ""
     @objc public var inputTextFont: UIFont?
     @objc public var inputTextColor: UIColor?
@@ -73,10 +74,34 @@ public class RowEntity: NSObject {
     
     /// Custom property
     /// 有些 cell 要存日期, 用这个属性
-    @objc dynamic public var date: Date?
+    internal var preCurrectDate: Date = Date()
+    @objc dynamic public var date: Date = Date()
     /// 用户自定义数据, 比如用来控制颜色或者其他
-    public var customControl: CustomEntityType = EmptyCustomEntity()
+    public var customEntity: CustomEntityType = EmptyCustomEntity()
+    
     public var indexPath: IndexPath = IndexPath(row: -1, section: -1)
+    
+    /// 所有的回调
+    public var handleBox: HandleBox = HandleBox()
+    
+    /// 弱持有所有的数据
+    public weak var dataCenter: TableViewDataCenter? {
+        didSet {
+            dataCenterDisposeBag = DisposeBag()
+            if let unwrapDataCenter = dataCenter {
+                /// 把验证器拿出来
+                validator = unwrapDataCenter.verifiers[verificationSegue]
+                /// 把最后一次验证通过的值存下来
+                beforeVerifyStoreCurrect()
+                /// 验证不通过时, 通知到 Handle
+                verifiedFailedImplement()
+            }
+        }
+    }
+    
+    /// 该 Row 的验证器
+    private var validator: ValidatorType?
+    private var dataCenterDisposeBag: DisposeBag = DisposeBag()
     
     /// Life cycle
     override public func setValuesForKeys(_ keyedValues: [String : Any]) {
@@ -104,34 +129,157 @@ public class RowEntity: NSObject {
     
     override public init() {
         super.init()
+        privateInit()
     }
     
     public convenience init(withDictionary dic: [String : Any]) {
         self.init()
         setValuesForKeys(dic)
+        privateInit()
     }
     
     deinit {
-        print("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
+        debugPrint("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
     }
 }
 
 // MARK: - Private method
 extension RowEntity {
     
+    private func privateInit() {
+    }
+    
+    /// 把最后一次验证通过的值存下来
+    private func beforeVerifyStoreCurrect() {
+        
+        /// 把上一次验证通过的 InputText 值存下来
+        rx.inputText
+            //.debug()
+            .filter({ [weak self] (_) -> Bool in
+                //debugPrint("\(String(describing: self?.inputText))")
+                return self?.isVerified ?? false
+            })
+            .subscribe(onNext: { [unowned self] (item) in
+                self.preCurrectInputText = item ?? ""
+            })
+            .disposed(by: dataCenterDisposeBag)
+        
+        /// 把上一次验证通过的 date 值存下来
+        rx.date
+            .filter({ [weak self] (_) -> Bool in
+                //debugPrint("\(String(describing: self?.date))")
+                return self?.isVerified ?? false
+            })
+            .subscribe(onNext: { [unowned self] (item) in
+                self.preCurrectDate = item ?? Date()
+            })
+            .disposed(by: dataCenterDisposeBag)
+    }
+    
+    /// 验证不通过时, 通知到 Handle
+    private func verifiedFailedImplement() {
+        
+        /// 触发验证)
+        rx.inputText
+            .filter({ [weak self] (_) -> Bool in
+                return !(self?.isVerified ?? true)
+            })
+            .subscribe(onNext: { [unowned self] (_) in
+                let identifier: HandleIdentifier<RowEntity, String> = HandleIdentifier(type: CellEventType.verified, keyPath: \RowEntity.inputText)
+                self.implementHandle(withIdentifier: identifier)
+            })
+            .disposed(by: dataCenterDisposeBag)
+        
+        rx.date
+            .filter({ [weak self] (_) -> Bool in
+                return !(self?.isVerified ?? true)
+            })
+            .subscribe(onNext: { [unowned self] (_) in
+                let identifier = HandleIdentifier(type: CellEventType.verified, keyPath: \RowEntity.date)
+                self.implementHandle(withIdentifier: identifier)
+            })
+            .disposed(by: dataCenterDisposeBag)
+    }
+    
+    /// 验证一下是否验证通过
+    var isVerified: Bool {
+        return verifierEntity.verify(cellModel: self)
+    }
+    
+    /// 拿出来我的验证器
+    var verifierEntity: ValidatorType {
+        if let unwrapeDataCenter = dataCenter,
+            let myVerifier = unwrapeDataCenter.verifiers[verificationSegue] {
+            return myVerifier
+        }
+        return EmptyVerifier()
+    }
 }
 
 // MARK: - Public method
 extension RowEntity {
-    
+
+    /// 执行 RowEntity 中的 Handle
+    ///
+    /// - Parameter identifier: Handle 的 identifier
+    /// - Returns: Handle 存在并执行成功返回 True, 否则返回 False
+    @discardableResult
+    internal func implementHandle<RootType, ValueType>(withIdentifier identifier: HandleIdentifier<RootType, ValueType>) -> Bool {
+        
+        /// 要传到 Block 里去, 弱持有一下
+        unowned let shadowSelf = self
+        
+        switch identifier.type {
+        case .click:
+            if let handle: RowEntityHandle = handleBox.implement(identifier: identifier) {
+                /// 点击 Cell 的事件
+                handle(shadowSelf)
+                return true
+            }
+        case .verified:
+            if let handle: (((ValueType, ValueType, RowEntity)) -> Void) = handleBox.implement(identifier: identifier) {
+                /// 验证的事件
+                if let keyPath = identifier.keyPath {
+                    let keyPathValue = self[keyPath: keyPath]
+                    if keyPath == \RowEntity.inputText {
+                        if let previousVaule = self.preCurrectInputText as? ValueType, let nowVaule = keyPathValue as? ValueType {
+                            handle((previousVaule, nowVaule, shadowSelf))
+                            return true
+                        }
+                    } else if keyPath == \RowEntity.date {
+                        if let previousVaule = self.preCurrectDate as? ValueType, let nowVaule = keyPathValue as? ValueType {
+                            handle((previousVaule, nowVaule, shadowSelf))
+                            return true
+                        }
+                    }
+                }
+            }
+        case .custom:
+            if let handle: (((ValueType, RowEntity)) -> Void) = handleBox.implement(identifier: identifier) {
+                /// 自定义事件
+                if let keyPath = identifier.keyPath {
+                    let keyPathValue = self[keyPath: keyPath]
+                    if let nowValue = keyPathValue as? ValueType {
+                        handle((nowValue, shadowSelf))
+                        return true
+                    }
+                }
+            }
+        }
+        
+        return false
+    }
 }
 
-extension Dictionary where Key == String, Value == Any {
-    mutating func fetchValueAndRemove<ValueType>(withKey key: String) -> ValueType? {
-        if let tmpValue = self[key] as? ValueType {
-            self.removeValue(forKey: key)
-            return tmpValue
+// MARK: - RowEntityChainCallable
+extension RowEntity: RowEntityChainCallable { }
+
+// MARK: - FindRowEntityAbility
+extension RowEntity: FindRowEntityAbility {
+    public func getDataCenter() -> TableViewDataCenter {
+        guard let realDataCenter = dataCenter else {
+            fatalError("DataCenter 未赋值之前不允许使用")
         }
-        return nil
+        return realDataCenter
     }
 }
