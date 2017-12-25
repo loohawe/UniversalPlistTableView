@@ -40,6 +40,13 @@ public class TitleInputFreeHeight: BasePlistCell {
     override public func bindCellModel(_ model: RowEntity) -> Void {
         super.bindCellModel(model)
         cellModel = model
+        cellModel.rx.desc.subscribe(onNext: { [weak self] (desc) in
+            self?.contentLabel.text = desc
+        }).disposed(by: disposeBag)
+        
+        model.rx.inputText.subscribe(onNext: { [weak self] (input) in
+            self?.fireButton.titleLabel?.text = input
+        }).disposed(by: disposeBag)
     }
     
     override public func updateCell(withCustomProperty property: CustomEntityType) {

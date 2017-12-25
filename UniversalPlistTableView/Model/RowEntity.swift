@@ -11,14 +11,31 @@ import RxSwift
 public protocol CustomEntityType { }
 public struct EmptyCustomEntity: CustomEntityType { }
 
+/// Cell model 的属性
+public enum RowEntityProperty: String {
+    case title
+    case subTitle
+    case desc
+    case inputText
+    case inputPlaceHolder
+    case inputVerificationRegex
+    case inputVerificationDeferedMessage
+    case leadingIcon
+    case trailingIcon    
+}
+
 /// Cell model
 /// Cell 对应的 Model
 public class RowEntity: NSObject {
     
+    public static func getEmptyEntity() -> RowEntity {
+        return RowEntity()
+    }
+    
     /// Plist data
     @objc public var identifier: String = ""
     public var accessoryType: UITableViewCellAccessoryType = .none
-    public var height: Double = 44.0
+    @objc public var height: Double = 44.0
     public var rawTitle: String = "" {
         didSet {
             title = rawTitle.univDerive.content
@@ -88,7 +105,7 @@ public class RowEntity: NSObject {
     public weak var dataCenter: TableViewDataCenter? {
         didSet {
             dataCenterDisposeBag = DisposeBag()
-            if let unwrapDataCenter = dataCenter {
+            if let _ = dataCenter {
                 /// 把验证器拿出来
                 /// 把最后一次验证通过的值存下来
                 beforeVerifyStoreCurrect()

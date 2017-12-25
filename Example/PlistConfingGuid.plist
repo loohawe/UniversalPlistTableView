@@ -4,11 +4,11 @@
 <array>
 	<dict>
 		<key>headerTitle</key>
-		<string>{&quot;content&quot;: &quot;title1&quot;, &quot;fontSize&quot;: 15.0, &quot;color&quot;: &quot;9090a0&quot;}</string>
+		<string>基本信息</string>
 		<key>headerHeight</key>
 		<integer>44</integer>
 		<key>footerTitle</key>
-		<string>footer1</string>
+		<string>🎠🎠🎠🎠🎠🎠🎠🎠🎠🎠</string>
 		<key>footerHeight</key>
 		<integer>30</integer>
 		<key>rows</key>
@@ -21,32 +21,30 @@
 				<key>height</key>
 				<integer>60</integer>
 				<key>title</key>
-				<string>这是标题</string>
+				<string>姓名</string>
 				<key>subTitle</key>
-				<string>这是副标题</string>
+				<string>{&quot;content&quot;: &quot;描述&quot;, &quot;fontSize&quot;: 15.0, &quot;color&quot;: &quot;9090a0&quot;}</string>
 				<key>description</key>
-				<string>这个 Cell 的 Description</string>
+				<string></string>
 				<key>inputText</key>
-				<string>1234</string>
+				<string></string>
 				<key>isRequired</key>
-				<integer>1</integer>
+				<true/>
 				<key>keyboardType</key>
 				<integer>0</integer>
 				<key>inputPlaceHolder</key>
-				<string>牛逼的占位</string>
+				<string>请输入</string>
 				<key>inputVerificationRegex</key>
 				<string>Regular Express String</string>
 				<key>inputVerificationMaxCount</key>
-				<integer>5</integer>
+				<integer>6</integer>
 				<key>inputVerificationDeferedMessage</key>
-				<string>错误提示, 输入验证不通过</string>
+				<string>请输入姓名</string>
 				<key>commitKey</key>
 				<string>name</string>
 				<key>leadingIcon</key>
-				<string>SmallIcon</string>
+				<string></string>
 				<key>trailingIcon</key>
-				<string>CryIcon</string>
-				<key>didSelectSegue</key>
 				<string></string>
 				<key>verificationSegue</key>
 				<string>characterCountVerify</string>
@@ -59,84 +57,80 @@
 				<key>height</key>
 				<real>60</real>
 				<key>title</key>
-				<string>这是标题</string>
+				<string>年龄</string>
 				<key>subTitle</key>
-				<string>这是副标题</string>
+				<string></string>
 				<key>description</key>
-				<string>这个 Cell 的 Description</string>
+				<string></string>
 				<key>inputText</key>
-				<string>输入的文本这这里</string>
+				<string></string>
 				<key>isRequired</key>
-				<false/>
+				<true/>
 				<key>keyboardType</key>
-				<integer>0</integer>
+				<integer>6</integer>
 				<key>inputPlaceHolder</key>
-				<string>牛逼的占位</string>
+				<string>请输入</string>
 				<key>inputVerificationRegex</key>
 				<string>Regular Express String</string>
 				<key>inputVerificationMaxCount</key>
-				<integer>5</integer>
+				<integer>4</integer>
 				<key>inputVerificationDeferedMessage</key>
-				<string>错误提示, 输入验证不通过</string>
+				<string>请输入年龄</string>
 				<key>commitKey</key>
 				<string>age</string>
 				<key>leadingIcon</key>
-				<string>SmallIcon</string>
+				<string></string>
 				<key>trailingIcon</key>
-				<string>CryIcon</string>
-				<key>didSelectSegue</key>
 				<string></string>
 				<key>verificationSegue</key>
-				<string></string>
+				<string>characterCountVerify</string>
 			</dict>
 		</array>
 	</dict>
 	<dict>
 		<key>headerTitle</key>
-		<string>{&quot;content&quot;: &quot;title1&quot;, &quot;fontSize&quot;: 15.0, &quot;color&quot;: &quot;9090a0&quot;}</string>
+		<string>补充信息</string>
 		<key>headerHeight</key>
 		<integer>44</integer>
 		<key>footerTitle</key>
-		<string>footer1</string>
+		<string>🎠🎠🎠🎠🎠🎠🎠🎠🎠🎠</string>
 		<key>footerHeight</key>
 		<integer>30</integer>
 		<key>rows</key>
 		<array>
 			<dict>
 				<key>identifier</key>
-				<string>titleInputCellIdentifier</string>
+				<string>titleInputFreeHeightIdentifier</string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 				<key>height</key>
-				<integer>60</integer>
+				<integer>-1</integer>
 				<key>title</key>
-				<string>这是标题</string>
+				<string>石黑一雄</string>
 				<key>subTitle</key>
-				<string>这是副标题</string>
+				<string></string>
 				<key>description</key>
-				<string>这个 Cell 的 Description</string>
+				<string>A Pale View of Hills是石黑一雄处女作，一部问世30年仍在不断重印的名作。小说通过一个移居英国的日本寡妇对故土、故人的回忆，讲述了战后长崎一对饱受磨难的母女渴望安定与新生，却始终走不出战乱带来的阴影与心魔，最终以母女成功移民，而女儿自尽作为悲情结局。作品构思奇特，叙述者通篇的回忆是模糊而可疑的，直至全书终，叙述者才忘记了伪装，读者也证实了猜想：叙述者是利用回忆做掩护，编织了一个他人的故事，企图通过他人的面具来讲述自己的故事，以减轻罪恶感。</string>
 				<key>inputText</key>
-				<string>输入的文本这这里</string>
+				<string>查看详情</string>
 				<key>isRequired</key>
-				<integer>1</integer>
+				<false/>
 				<key>keyboardType</key>
 				<integer>0</integer>
 				<key>inputPlaceHolder</key>
-				<string>牛逼的占位</string>
+				<string></string>
 				<key>inputVerificationRegex</key>
 				<string>Regular Express String</string>
 				<key>inputVerificationMaxCount</key>
 				<integer>5</integer>
 				<key>inputVerificationDeferedMessage</key>
-				<string>错误提示, 输入验证不通过</string>
+				<string></string>
 				<key>commitKey</key>
-				<string>提交的 Key1</string>
+				<string>favo</string>
 				<key>leadingIcon</key>
 				<string>SmallIcon</string>
 				<key>trailingIcon</key>
 				<string>CryIcon</string>
-				<key>didSelectSegue</key>
-				<string></string>
 				<key>verificationSegue</key>
 				<string></string>
 			</dict>

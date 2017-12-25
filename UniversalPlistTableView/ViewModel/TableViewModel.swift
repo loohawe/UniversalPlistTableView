@@ -149,7 +149,9 @@ extension TableViewModel {
     private func registPresetCell(_ aTableView: UITableView) {
         let cellNib = UINib(nibName: "TitleInputCell", bundle: BundleHelper.resourcesBundle())
         aTableView.register(cellNib, forCellReuseIdentifier: CONST_titleInputCellIdentifier)
-        //aTableView.register(TitleInputCell.self, forCellReuseIdentifier: CONST_titleInputCellIdentifier)
+        
+        let freeHeightCell = UINib(nibName: "TitleInputFreeHeight", bundle: BundleHelper.resourcesBundle())
+        aTableView.register(freeHeightCell, forCellReuseIdentifier: CONST_titleInputFreeHeightIdentifier)
     }
     
     /// 注册预设的验证器

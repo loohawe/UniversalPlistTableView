@@ -24,6 +24,15 @@ public protocol FindRowEntityAbility {
 
 extension FindRowEntityAbility {
     
+    public func hasEntity(forKey key: String) -> Bool {
+        for item in getDataCenter().sectionList.flatMap({ $0.rows }) {
+            if item.commitKey == key {
+                return true
+            }
+        }
+        return false
+    }
+    
     /// 根据 Commit Key 找 Row
     public func key(_ commitKey: String) -> RowEntity {
         for item in getDataCenter().sectionList.flatMap({ $0.rows }) {
@@ -31,8 +40,8 @@ extension FindRowEntityAbility {
                 return item
             }
         }
-        
-        fatalError("\n\n\n================================\n没有找到 Key 为 \(commitKey) 的 Cell\n\n\n")
+        print("\n\n\n================================\n没有找到 Key 为 \(commitKey) 的 Cell\n\n\n")
+        return RowEntity.getEmptyEntity()
     }
     
     /// 根据 IndexPath 找 Row

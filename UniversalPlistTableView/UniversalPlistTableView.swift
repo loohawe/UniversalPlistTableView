@@ -11,6 +11,7 @@ import RxCocoa
 import SnapKit
 
 public let CONST_titleInputCellIdentifier = "titleInputCellIdentifier"
+public let CONST_titleInputFreeHeightIdentifier = "titleInputFreeHeightIdentifier"
 
 public var VAR_DebugPrint: Bool = true
 internal func debugPrint(_ message: String) {
@@ -104,12 +105,18 @@ public extension UniversalPlistTableView {
         return result
     }
     
-    public func commitInformation() -> (Bool, [String : Any]) {
+    /// 提交 tableView 中的信息, 并触发必填验证
+    public func commitInputText() -> (Bool, [String : Any]) {
+        return commit(property: .inputText)
+    }
+    
+    /// 提交 tableView 中制定的信息, 并触发必填验证
+    public func commit(property proName: RowEntityProperty) -> (Bool, [String : Any]) {
         
         /// 把每个 Cell 里的值拿出来
         var info: [String : Any] = [:]
         sectionList.flatMap { $0.rows }.forEach { (row) in
-            info[row.commitKey] = row.inputText
+            info[row.commitKey] = row.value(forKey: proName.rawValue)
         }
         
         /// 每个 cell 触发一次验证
@@ -149,6 +156,20 @@ public extension UniversalPlistTableView {
     /// 注册验证逻辑
     public func regist<VerifierType>(verificationClass aVerification: VerifierType, forSegue segue: String) where VerifierType: ValidatorType {
         tableViewModel.regist(verificationClass: aVerification, forSegue: segue)
+    }
+    
+    /// Assign dictionary to tableview
+    /// 根据 key 给 cell 赋值
+    public func fillingRow(property: RowEntityProperty, with dic: [String : Any]) {
+        dic.forEach { (key, value) in
+            if self.hasEntity(forKey: key) {
+                if let valueStr = value as? String {
+                    self.key(key).setValue(valueStr, forKey: property.rawValue)
+                } else {
+                    self.key(key).setValue("\(value)", forKey: property.rawValue)
+                }
+            }
+        }
     }
 }
 
