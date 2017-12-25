@@ -73,17 +73,17 @@ class ViewController: UIViewController {
         //debugPrint(tableView.extractCommitInfomation())
         debugPrint(tableView.commitInputText())
         
-        tableView.fillingRow(property: .title, with: [
-            "name": "大名",
-            "age": "贵庚",
-            "favo": "村上春树",
-            "nothing": 0.001
-            ])
+//        tableView.fillingRow(property: .title, with: [
+//            "name": "大名",
+//            "age": "贵庚",
+//            "favo": "村上春树",
+//            "nothing": 0.001
+//            ])
         
         tableView.fillingRow(property: .desc, with: [
             "favo": "当我在跑步的时候我在想什么",
             "nothing": 0.001
-            ])
+            ]).reload()
     }
 }
 

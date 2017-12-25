@@ -46,7 +46,7 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="x7W-5z-whR" secondAttribute="bottom" constant="16" id="3Pf-kL-1MT"/>
+                    <constraint firstAttribute="bottom" secondItem="x7W-5z-whR" secondAttribute="bottom" priority="999" constant="16" id="3Pf-kL-1MT"/>
                     <constraint firstItem="a2x-rj-Zd5" firstAttribute="leading" secondItem="p5J-xM-PGl" secondAttribute="trailing" constant="8" id="3XQ-FL-cmR"/>
                     <constraint firstAttribute="trailing" secondItem="x7W-5z-whR" secondAttribute="trailing" constant="16" id="4FR-Gy-Za2"/>
                     <constraint firstItem="x7W-5z-whR" firstAttribute="top" secondItem="a2x-rj-Zd5" secondAttribute="bottom" constant="4" id="6KU-PZ-9gl"/>
@@ -62,7 +62,7 @@
                 <outlet property="fireButton" destination="a2x-rj-Zd5" id="Mi7-y7-4Wv"/>
                 <outlet property="titleLabel" destination="p5J-xM-PGl" id="ya2-Bg-Kds"/>
             </connections>
-            <point key="canvasLocation" x="-108" y="-0.5"/>
+            <point key="canvasLocation" x="-381" y="-88"/>
         </tableViewCell>
     </objects>
 </document>

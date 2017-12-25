@@ -160,7 +160,8 @@ public extension UniversalPlistTableView {
     
     /// Assign dictionary to tableview
     /// 根据 key 给 cell 赋值
-    public func fillingRow(property: RowEntityProperty, with dic: [String : Any]) {
+    @discardableResult
+    public func fillingRow(property: RowEntityProperty, with dic: [String : Any]) -> PlistTableViewTruck<[String : Any]> {
         dic.forEach { (key, value) in
             if self.hasEntity(forKey: key) {
                 if let valueStr = value as? String {
@@ -170,6 +171,42 @@ public extension UniversalPlistTableView {
                 }
             }
         }
+        
+        return PlistTableViewTruck(plistTableView: self, object: dic)
+    }
+    
+    /// Reload cell
+    public func reloadCell(_ indexKey: String, with animation: UITableViewRowAnimation = .fade) {
+        let rowIndex = key(indexKey).indexPath
+        if rowIndex.section != -1 {
+            tableView.reloadRows(at: [rowIndex], with: animation)
+        }
+    }
+    
+    public func reloadCell(_ indexKey: [Any], with animation: UITableViewRowAnimation = .fade) {
+        var indexPathList: [IndexPath] = []
+        indexKey.forEach { (item) in
+            let rowIndex = self.key("\(item)").indexPath
+            if rowIndex.section != -1 {
+                indexPathList.append(rowIndex)
+            }
+        }
+        tableView.reloadRows(at: indexPathList, with: animation)
+    }
+    
+    public func reloadCell(_ indexKey: [String : Any], with animation: UITableViewRowAnimation = .fade) {
+        var indexPathList: [IndexPath] = []
+        indexKey.enumerated()
+            .map {
+                $0.element.value
+            }
+            .forEach { (item) in
+                let rowIndex = self.key("\(item)").indexPath
+                if rowIndex.section != -1 {
+                    indexPathList.append(rowIndex)
+                }
+            }
+        tableView.reloadRows(at: indexPathList, with: animation)
     }
 }
 

@@ -142,6 +142,7 @@ extension TableViewModel {
         registPresetCell(newTableView)
         newTableView.delegate = self
         newTableView.dataSource = self
+        newTableView.estimatedRowHeight = 44.0
         tableView = newTableView
     }
     
