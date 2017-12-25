@@ -21,10 +21,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         try! tableView.install(plist: "PlistConfingGuid", inBundle: nil)
+        tableView.style = UITableViewStyle.plain
         
-        tableView.indexPath(IndexPath.init(row: 0, section: 0)).clickHandle { [unowned self] (rowEntity) in
-            debugPrint("\(rowEntity.title)")
-            self.tableView.indexPath(IndexPath.init(row: 1, section: 0)).title = "沃的天"
+        tableView
+            .indexPath(IndexPath.init(row: 0, section: 0))
+            .clickHandle { [unowned self] (rowEntity) in
+                debugPrint("\(rowEntity.title)")
+                self.tableView.indexPath(IndexPath.init(row: 1, section: 0)).title = "沃的天"
+            }
+            .verifyFailedHandle(\RowEntity.inputText) { (previousCurrentValue, nowValue, row) in
+                debugPrint("\n\(previousCurrentValue)\n\(nowValue)\n\(row)\n")
         }
         
         let rowEntity = tableView.key("name")
@@ -35,8 +41,6 @@ class ViewController: UIViewController {
         tableView.key("age").clickHandle { [unowned self] (row) in
             self.tableView.key("name").inputText = "abcdef"
         }
-        
-        
         
         /**
         /// 配置 Cell
@@ -66,7 +70,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction func commitInfoAction(_ sender: UIButton) {
-        debugPrint(tableView.extractCommitInfomation())
+        //debugPrint(tableView.extractCommitInfomation())
+        debugPrint(tableView.commitInformation())
     }
 }
 

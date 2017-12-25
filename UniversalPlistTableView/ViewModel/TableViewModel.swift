@@ -11,23 +11,20 @@ import RxSwift
 internal class TableViewModel: NSObject {
     
     /// Out
-    internal var cellToastAtIndexPath: PublishSubject<IndexPath> = PublishSubject()
+    /// Did select cell signal
+    internal var didSelectCell: PublishSubject<RowEntity> = PublishSubject()
     
-    internal let configRowModel: PublishSubject<RowEntity> = PublishSubject()
+    /// 数据中心, 包括 section list 和 验证器
     internal var dataCenter: TableViewDataCenter = TableViewDataCenter(sectionList: [])
     internal var sectionList: [SectionEntity] {
         return dataCenter.sectionList
     }
     
-    internal var didSelectCell: PublishSubject<RowEntity> = PublishSubject()
+    internal var tableViewStyle: UITableViewStyle = UITableViewStyle.grouped {
+        didSet { reinitTableView() }
+    }
     
-    internal let tableView: UITableView = {
-        let tempTable: UITableView = UITableView(frame: CGRect.zero, style: .grouped)
-        let cellNib = UINib(nibName: "TitleInputCell", bundle: BundleHelper.resourcesBundle())
-        tempTable.register(cellNib, forCellReuseIdentifier: CONST_titleInputCellIdentifier)
-        //tempTable.register(TitleInputCell.self, forCellReuseIdentifier: CONST_titleInputCellIdentifier)
-        return tempTable
-    }()
+    internal var tableView: UITableView!
     
     /// MARK: - Private property
     var disposeBag: DisposeBag = DisposeBag()
@@ -50,6 +47,9 @@ extension TableViewModel: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let rowModel = pickupRow(indexPath)
+        if rowModel.height < 0 {
+            return UITableViewAutomaticDimension
+        }
         return CGFloat(rowModel.height)
     }
     
@@ -125,8 +125,35 @@ extension TableViewModel {
 extension TableViewModel {
     
     fileprivate func privateInit() {
-        tableView.delegate = self
-        tableView.dataSource = self
+        /// 初始化 tableView
+        reinitTableView()
+        /// 注册预设的验证器
+        registPresetVerifier()
+    }
+    
+    /// 重新初始化 tableView, 注意这个方法里 tableview 可能为空
+    private func reinitTableView() {
+        if tableView != nil {
+            tableView.removeFromSuperview()
+            tableView = nil
+        }
+        
+        let newTableView: UITableView = UITableView(frame: CGRect.zero, style: tableViewStyle)
+        registPresetCell(newTableView)
+        newTableView.delegate = self
+        newTableView.dataSource = self
+        tableView = newTableView
+    }
+    
+    /// 注册预设的 Cell
+    private func registPresetCell(_ aTableView: UITableView) {
+        let cellNib = UINib(nibName: "TitleInputCell", bundle: BundleHelper.resourcesBundle())
+        aTableView.register(cellNib, forCellReuseIdentifier: CONST_titleInputCellIdentifier)
+        //aTableView.register(TitleInputCell.self, forCellReuseIdentifier: CONST_titleInputCellIdentifier)
+    }
+    
+    /// 注册预设的验证器
+    private func registPresetVerifier() {
         regist(verificationClass: CharacterCountVerifier(), forSegue: "characterCountVerify")
     }
     

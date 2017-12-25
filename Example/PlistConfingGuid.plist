@@ -89,44 +89,6 @@
 				<key>verificationSegue</key>
 				<string></string>
 			</dict>
-			<dict>
-				<key>identifier</key>
-				<string>titleInputCellIdentifier</string>
-				<key>accessoryType</key>
-				<integer>0</integer>
-				<key>height</key>
-				<real>60</real>
-				<key>title</key>
-				<string>这是标题</string>
-				<key>subTitle</key>
-				<string>这是副标题</string>
-				<key>description</key>
-				<string>这个 Cell 的 Description</string>
-				<key>inputText</key>
-				<string>输入的文本这这里</string>
-				<key>isRequired</key>
-				<integer>1</integer>
-				<key>keyboardType</key>
-				<integer>0</integer>
-				<key>inputPlaceHolder</key>
-				<string>牛逼的占位</string>
-				<key>inputVerificationRegex</key>
-				<string>Regular Express String</string>
-				<key>inputVerificationMaxCount</key>
-				<integer>5</integer>
-				<key>inputVerificationDeferedMessage</key>
-				<string>错误提示, 输入验证不通过</string>
-				<key>commitKey</key>
-				<string>提交的 Key1</string>
-				<key>leadingIcon</key>
-				<string>SmallIcon</string>
-				<key>trailingIcon</key>
-				<string>CryIcon</string>
-				<key>didSelectSegue</key>
-				<string></string>
-				<key>verificationSegue</key>
-				<string></string>
-			</dict>
 		</array>
 	</dict>
 	<dict>
@@ -147,82 +109,6 @@
 				<integer>0</integer>
 				<key>height</key>
 				<integer>60</integer>
-				<key>title</key>
-				<string>这是标题</string>
-				<key>subTitle</key>
-				<string>这是副标题</string>
-				<key>description</key>
-				<string>这个 Cell 的 Description</string>
-				<key>inputText</key>
-				<string>输入的文本这这里</string>
-				<key>isRequired</key>
-				<integer>1</integer>
-				<key>keyboardType</key>
-				<integer>0</integer>
-				<key>inputPlaceHolder</key>
-				<string>牛逼的占位</string>
-				<key>inputVerificationRegex</key>
-				<string>Regular Express String</string>
-				<key>inputVerificationMaxCount</key>
-				<integer>5</integer>
-				<key>inputVerificationDeferedMessage</key>
-				<string>错误提示, 输入验证不通过</string>
-				<key>commitKey</key>
-				<string>提交的 Key1</string>
-				<key>leadingIcon</key>
-				<string>SmallIcon</string>
-				<key>trailingIcon</key>
-				<string>CryIcon</string>
-				<key>didSelectSegue</key>
-				<string></string>
-				<key>verificationSegue</key>
-				<string></string>
-			</dict>
-			<dict>
-				<key>identifier</key>
-				<string>titleInputCellIdentifier</string>
-				<key>accessoryType</key>
-				<integer>0</integer>
-				<key>height</key>
-				<real>60</real>
-				<key>title</key>
-				<string>这是标题</string>
-				<key>subTitle</key>
-				<string>这是副标题</string>
-				<key>description</key>
-				<string>这个 Cell 的 Description</string>
-				<key>inputText</key>
-				<string>输入的文本这这里</string>
-				<key>isRequired</key>
-				<integer>1</integer>
-				<key>keyboardType</key>
-				<integer>0</integer>
-				<key>inputPlaceHolder</key>
-				<string>牛逼的占位</string>
-				<key>inputVerificationRegex</key>
-				<string>Regular Express String</string>
-				<key>inputVerificationMaxCount</key>
-				<integer>5</integer>
-				<key>inputVerificationDeferedMessage</key>
-				<string>错误提示, 输入验证不通过</string>
-				<key>commitKey</key>
-				<string>提交的 Key1</string>
-				<key>leadingIcon</key>
-				<string>SmallIcon</string>
-				<key>trailingIcon</key>
-				<string>CryIcon</string>
-				<key>didSelectSegue</key>
-				<string></string>
-				<key>verificationSegue</key>
-				<string></string>
-			</dict>
-			<dict>
-				<key>identifier</key>
-				<string>titleInputCellIdentifier</string>
-				<key>accessoryType</key>
-				<integer>0</integer>
-				<key>height</key>
-				<real>60</real>
 				<key>title</key>
 				<string>这是标题</string>
 				<key>subTitle</key>

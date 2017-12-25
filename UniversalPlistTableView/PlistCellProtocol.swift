@@ -25,8 +25,6 @@ import RxSwift
  
  */
 public class BasePlistCell: UITableViewCell, PlistCellProtocol {
-
-    public var customModel: CustomEntityType = EmptyCustomEntity()
     
     /// Your cell must have this property
     /// 自定义的 cell 必须要有这个属性
@@ -43,11 +41,10 @@ public class BasePlistCell: UITableViewCell, PlistCellProtocol {
     deinit {
         debugPrint("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
     }
-}
-
-/// Default implement
-/// 给 cell 一些默认实现啦
-extension BasePlistCell {
+    
+    public func provideCustomModel() -> CustomEntityType {
+        return EmptyCustomEntity()
+    }
     
     public func bindCellModel(_ model: RowEntity) -> Void {
         disposeBag = DisposeBag()
@@ -68,7 +65,8 @@ extension BasePlistCell {
         }
         
         if selfPropertyNameList.contains("inputTextField"),
-        let inputTextField = value(forKey: "inputTextField") as? UITextField {
+            let inputTextField = value(forKey: "inputTextField") as? UITextField {
+            inputTextField.keyboardType = model.keyboardType
             (inputTextField.rx.text <--==--> model.rx.inputText)
                 .disposed(by: disposeBag)
             
@@ -82,7 +80,7 @@ extension BasePlistCell {
                 .bind(to: subTitleLabel.rx.text)
                 .disposed(by: disposeBag)
         }
-
+        
         if selfPropertyNameList.contains("descLabel"),
             let descLabel = value(forKey: "descLabel") as? UILabel {
             model.rx.desc
@@ -90,7 +88,7 @@ extension BasePlistCell {
                 .bind(to: descLabel.rx.text)
                 .disposed(by: disposeBag)
         }
-
+        
         if selfPropertyNameList.contains("leadingIconImageView"),
             let leadingIconImageView = value(forKey: "leadingIconImageView") as? UIImageView {
             model.rx.leadingIcon
@@ -99,7 +97,7 @@ extension BasePlistCell {
                 .bind(to: leadingIconImageView.rx.image)
                 .disposed(by: disposeBag)
         }
-
+        
         if selfPropertyNameList.contains("trailingIcon"),
             let trailingIconImageView = value(forKey: "trailingIcon") as? UIImageView {
             model.rx.trailingIcon
@@ -120,7 +118,7 @@ public protocol PlistCellProtocol {
     
     /// Original custom cell model
     /// 自定义的 Cell model, 其中初始值会初始化到 Cell 上.
-    var customModel: CustomEntityType { get }
+    func provideCustomModel() -> CustomEntityType
     
     /// Cell bind to cellModel
     /// 从这里你要 Bind 相关属性到你的 Cell 上

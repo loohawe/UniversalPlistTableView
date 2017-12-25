@@ -22,6 +22,16 @@ internal func debugPrint(_ message: String) {
 public class UniversalPlistTableView: UIView {
 
     // MARK: - Public Property
+    
+    // MARK: - UI Config
+    @IBInspectable public var style: UITableViewStyle = UITableViewStyle.grouped {
+        didSet {
+            tableViewModel.tableViewStyle = style
+            reinitTableView()
+        }
+    }
+    
+    // MARK: - Signal
     /// In
     /// TableView will begin or end loading
     public var isLoading: PublishSubject<Bool> = PublishSubject()
@@ -29,11 +39,11 @@ public class UniversalPlistTableView: UIView {
     /// Out
     /// Before return cell, the last time to config cell model(RowEntity)
     /// 在 return cell 之前, 最后一次机会去配置 cell
-    public var configRowModel: PublishSubject<RowEntity> { get{ return tableViewModel.configRowModel } }
+    //public var configRowModel: PublishSubject<RowEntity> { get{ return tableViewModel.configRowModel } }
     
     /// TableView toast message when something wrong or some infomation needed user to know, Example the Row-input verification refered.
     /// 当有提示需要展视的时候, 会触发此信号, 按需订阅
-    public let toastAtIndexPath: PublishSubject<IndexPath> = PublishSubject()
+    //public let toastAtIndexPath: PublishSubject<IndexPath> = PublishSubject()
     
     /// Did selected indexpath
     /// 选中某个 cell
@@ -41,7 +51,12 @@ public class UniversalPlistTableView: UIView {
         return tableViewModel.didSelectCell
     }
     
+    /// Input text changed signal
+    /// 任意一个 inputText 值改变的时候, 会触发此信号
     public var valueChanged: PublishSubject<RowEntity> = PublishSubject()
+    
+    /// Input text changed signal exclude vefified failed.
+    /// inputText 值改变, 并且通过了验证器以后, 会触发此信号
     public var valueChangedFilted: PublishSubject<RowEntity> = PublishSubject()
     
     public var tableView: UITableView {
@@ -50,7 +65,8 @@ public class UniversalPlistTableView: UIView {
     public var sectionList: [SectionEntity] {
         return tableViewModel.sectionList
     }
-    public var dataCenter: TableViewDataCenter {
+    
+    private var dataCenter: TableViewDataCenter {
         return tableViewModel.dataCenter
     }
 
@@ -88,6 +104,26 @@ public extension UniversalPlistTableView {
         return result
     }
     
+    public func commitInformation() -> (Bool, [String : Any]) {
+        
+        /// 把每个 Cell 里的值拿出来
+        var info: [String : Any] = [:]
+        sectionList.flatMap { $0.rows }.forEach { (row) in
+            info[row.commitKey] = row.inputText
+        }
+        
+        /// 每个 cell 触发一次验证
+        var passedVerified: Bool = true
+        VerifyCell: for rowItem in sectionList.flatMap({ $0.rows }) {
+            if !rowItem.verifyCheck() {
+                passedVerified = false
+                break VerifyCell
+            }
+        }
+        
+        return (passedVerified, info)
+    }
+    
     /// Setup SourceData from plist
     /// 从 plist 设置数据源
     public func install(plist plistName: String, inBundle bundle: Bundle?) throws {
@@ -120,7 +156,10 @@ public extension UniversalPlistTableView {
 extension UniversalPlistTableView {
     
     fileprivate func privateInit() {
-        tableViewModel.cellToastAtIndexPath.bind(to: toastAtIndexPath).disposed(by: disposeBag)
+        reinitTableView()
+    }
+    
+    private func reinitTableView() {
         addSubview(tableViewModel.tableView)
         tableViewModel.tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()

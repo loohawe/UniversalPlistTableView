@@ -74,8 +74,8 @@ public class RowEntity: NSObject {
     
     /// Custom property
     /// 有些 cell 要存日期, 用这个属性
-    internal var preCurrectDate: Date = Date()
-    @objc dynamic public var date: Date = Date()
+    internal var preCurrectDate: Date = Date.init(timeIntervalSince1970: 0)
+    @objc dynamic public var date: Date = Date.init(timeIntervalSince1970: 0)
     /// 用户自定义数据, 比如用来控制颜色或者其他
     public var customEntity: CustomEntityType = EmptyCustomEntity()
     
@@ -90,7 +90,6 @@ public class RowEntity: NSObject {
             dataCenterDisposeBag = DisposeBag()
             if let unwrapDataCenter = dataCenter {
                 /// 把验证器拿出来
-                validator = unwrapDataCenter.verifiers[verificationSegue]
                 /// 把最后一次验证通过的值存下来
                 beforeVerifyStoreCurrect()
                 /// 验证不通过时, 通知到 Handle
@@ -99,8 +98,37 @@ public class RowEntity: NSObject {
         }
     }
     
-    /// 该 Row 的验证器
-    private var validator: ValidatorType?
+    /// 验证一下是否验证通过
+    private var isVerified: Bool {
+        return verifierEntity.verify(cellModel: self)
+    }
+    
+    /// 验证一下是否验证通过, 包括验证是否必填, 验证不通过, 触发一次验证不通过的 handle
+    public func verifyCheck() -> Bool {
+        
+        if isRequired {
+            if inputText.isEmpty {
+                self.verifyInputText()
+                return false
+            }
+        }
+        if isVerified {
+            return true
+        } else {
+            self.verifyInputText()
+            return false
+        }
+    }
+    
+    /// 拿出来我的验证器
+    private var verifierEntity: ValidatorType {
+        if let unwrapeDataCenter = dataCenter,
+            let myVerifier = unwrapeDataCenter.verifiers[verificationSegue] {
+            return myVerifier
+        }
+        return EmptyVerifier()
+    }
+    
     private var dataCenterDisposeBag: DisposeBag = DisposeBag()
     
     /// Life cycle
@@ -179,14 +207,13 @@ extension RowEntity {
     /// 验证不通过时, 通知到 Handle
     private func verifiedFailedImplement() {
         
-        /// 触发验证)
+        /// 触发验证
         rx.inputText
             .filter({ [weak self] (_) -> Bool in
                 return !(self?.isVerified ?? true)
             })
             .subscribe(onNext: { [unowned self] (_) in
-                let identifier: HandleIdentifier<RowEntity, String> = HandleIdentifier(type: CellEventType.verified, keyPath: \RowEntity.inputText)
-                self.implementHandle(withIdentifier: identifier)
+                self.verifyInputText()
             })
             .disposed(by: dataCenterDisposeBag)
         
@@ -201,18 +228,10 @@ extension RowEntity {
             .disposed(by: dataCenterDisposeBag)
     }
     
-    /// 验证一下是否验证通过
-    var isVerified: Bool {
-        return verifierEntity.verify(cellModel: self)
-    }
-    
-    /// 拿出来我的验证器
-    var verifierEntity: ValidatorType {
-        if let unwrapeDataCenter = dataCenter,
-            let myVerifier = unwrapeDataCenter.verifiers[verificationSegue] {
-            return myVerifier
-        }
-        return EmptyVerifier()
+    /// 触发 InputText 的验证
+    private func verifyInputText() {
+        let identifier: HandleIdentifier<RowEntity, String> = HandleIdentifier(type: CellEventType.verified, keyPath: \RowEntity.inputText)
+        self.implementHandle(withIdentifier: identifier)
     }
 }
 
