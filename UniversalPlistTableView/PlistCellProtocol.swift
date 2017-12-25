@@ -24,16 +24,16 @@ import RxSwift
      trailingIconImageView: UIImageView
  
  */
-public class BasePlistCell: UITableViewCell, PlistCellProtocol {
+open class BasePlistCell: UITableViewCell, PlistCellProtocol {
     
     /// Your cell must have this property
     /// 自定义的 cell 必须要有这个属性
     /// 当 Cell Reuse 的时候释放一些资源
-    public var disposeBag: DisposeBag = DisposeBag()
+    open var disposeBag: DisposeBag = DisposeBag()
     
     /// Override
     
-    override public func prepareForReuse() {
+    override open func prepareForReuse() {
         super.prepareForReuse()
         disposeBag = DisposeBag()
     }
@@ -42,11 +42,11 @@ public class BasePlistCell: UITableViewCell, PlistCellProtocol {
         debugPrint("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
     }
     
-    public func provideCustomModel() -> CustomEntityType {
+    open func provideCustomModel() -> CustomEntityType {
         return EmptyCustomEntity()
     }
     
-    public func bindCellModel(_ model: RowEntity) -> Void {
+    open func bindCellModel(_ model: RowEntity) -> Void {
         disposeBag = DisposeBag()
         
         let selfMirror = Mirror(reflecting: self)
@@ -108,7 +108,7 @@ public class BasePlistCell: UITableViewCell, PlistCellProtocol {
         }
     }
     
-    public func updateCell(withCustomProperty property: CustomEntityType) -> Void {
+    open func updateCell(withCustomProperty property: CustomEntityType) -> Void {
         /// Override this method to implement your custom behavior
         
     }
