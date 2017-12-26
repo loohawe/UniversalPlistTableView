@@ -13,5 +13,4 @@ public protocol CustomEntityType {
 public class BaseCustomEntity: CustomEntityType {
     required public init() { }
     final weak var rowEntity: RowEntity!
-    
 }
