@@ -54,9 +54,11 @@ extension TableViewModel: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let rowMode = pickupRow(indexPath)
-        didSelectCell.onNext(rowMode)
-        didSelect(row: rowMode)
+        let rowModel = pickupRow(indexPath)
+        if rowModel.isClicked {
+            didSelectCell.onNext(rowModel)
+            didSelect(row: rowModel)
+        }
     }
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

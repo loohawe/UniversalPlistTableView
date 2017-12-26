@@ -198,7 +198,7 @@ public extension UniversalPlistTableView {
         var indexPathList: [IndexPath] = []
         indexKey.enumerated()
             .map {
-                $0.element.value
+                $0.element.key
             }
             .forEach { (item) in
                 let rowIndex = self.key("\(item)").indexPath

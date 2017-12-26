@@ -106,6 +106,32 @@ open class BasePlistCell: UITableViewCell, PlistCellProtocol {
                 .bind(to: trailingIconImageView.rx.image)
                 .disposed(by: disposeBag)
         }
+        
+        /// 订阅是否可编辑
+        model.rx.isEditable
+            .subscribe(onNext: { [weak self] (isEdit) in
+                guard let `self` = self else { return }
+                let canEdit: Bool = isEdit ?? false
+                
+                self.contentView.subviews.forEach({ (itemView) in
+                    if let someTextField = itemView as? UITextField {
+                        
+                        if !canEdit {
+                            someTextField.endEditing(true)
+                        }
+                        someTextField.isEnabled = canEdit
+                        
+                    } else if let someTextView = itemView as? UITextView {
+                        
+                        if !canEdit {
+                            someTextView.endEditing(true)
+                        }
+                        someTextView.isEditable = canEdit
+                        
+                    }
+                })
+            })
+            .disposed(by: disposeBag)
     }
     
     open func updateCell(withCustomProperty property: CustomEntityType) -> Void {

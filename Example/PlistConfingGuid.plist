@@ -30,6 +30,10 @@
 				<string></string>
 				<key>isRequired</key>
 				<true/>
+				<key>isClicked</key>
+				<true/>
+				<key>isEditable</key>
+				<true/>
 				<key>keyboardType</key>
 				<integer>0</integer>
 				<key>inputPlaceHolder</key>
@@ -65,6 +69,10 @@
 				<key>inputText</key>
 				<string></string>
 				<key>isRequired</key>
+				<true/>
+				<key>isClicked</key>
+				<true/>
+				<key>isEditable</key>
 				<true/>
 				<key>keyboardType</key>
 				<integer>6</integer>
@@ -114,6 +122,10 @@
 				<key>inputText</key>
 				<string>查看详情</string>
 				<key>isRequired</key>
+				<false/>
+				<key>isClicked</key>
+				<false/>
+				<key>isEditable</key>
 				<false/>
 				<key>keyboardType</key>
 				<integer>0</integer>

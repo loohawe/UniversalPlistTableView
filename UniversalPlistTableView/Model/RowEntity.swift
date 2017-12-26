@@ -77,7 +77,9 @@ public class RowEntity: NSObject {
     @objc dynamic public var inputText: String = ""
     @objc public var inputTextFont: UIFont?
     @objc public var inputTextColor: UIColor?
-    @objc public var isRequired: Bool = false
+    @objc public var isRequired: Bool = false /// 是否要求必填
+    @objc dynamic public var isClicked: Bool = true /// cell 是否可点击
+    @objc dynamic public var isEditable: Bool = true /// cell 的 subview 是否可编辑
     @objc public var keyboardType: UIKeyboardType = .default
     @objc public var inputPlaceHolder: String = ""
     @objc public var inputVerificationRegex: String = ""

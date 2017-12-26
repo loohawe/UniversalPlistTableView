@@ -57,6 +57,18 @@ extension Reactive where Base: RowEntity {
             self.base.trailingIcon = value
         })
     }
+    
+    public var isClicked: EntityInOut<Bool?> {
+        return value(keyPath: "isClicked", setter: { (value: Bool) in
+            self.base.isClicked = value
+        })
+    }
+    
+    public var isEditable: EntityInOut<Bool?> {
+        return value(keyPath: "isEditable", setter: { (value: Bool) in
+            self.base.isEditable = value
+        })
+    }
 }
 
 extension Reactive where Base: RowEntity {

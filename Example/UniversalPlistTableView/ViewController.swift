@@ -84,6 +84,9 @@ class ViewController: UIViewController {
             "favo": "当我在跑步的时候我在想什么",
             "nothing": 0.001
             ]).reload()
+        
+        tableView.key("age").isEditable = false
+        tableView.key("name").isClicked = false
     }
 }
 
