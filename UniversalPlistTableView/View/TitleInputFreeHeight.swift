@@ -55,7 +55,7 @@ public class TitleInputFreeHeight: BasePlistCell {
     
 }
 
-public struct TitleInputFace: CustomEntityType {
+public class TitleInputFace: BaseCustomEntity {
     var fireAction: Any?
     var titleColor: UIColor = UIColor(hexString: "000000")
     var backgroundColor: UIColor = UIColor(hexString: "ffffff")

@@ -116,9 +116,6 @@ extension TableViewModel {
     /// Reload Data
     /// 刷新数据
     public func reloadData() {
-        //disposeBag = DisposeBag()
-        dataCenter.sectionList.flatMap { $0.rows }.forEach { $0.dataCenter = dataCenter }
-        //oberverRowModel(inSections: sectionList)
         tableView.reloadData()
     }
 }
@@ -145,7 +142,9 @@ extension TableViewModel {
         newTableView.delegate = self
         newTableView.dataSource = self
         newTableView.estimatedRowHeight = 44.0
+        
         tableView = newTableView
+        dataCenter.tableView = tableView
     }
     
     /// 注册预设的 Cell

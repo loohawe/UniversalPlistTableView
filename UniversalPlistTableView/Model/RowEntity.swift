@@ -8,9 +8,6 @@
 import UIKit
 import RxSwift
 
-public protocol CustomEntityType { }
-public struct EmptyCustomEntity: CustomEntityType { }
-
 /// Cell model 的属性
 public enum RowEntityProperty: String {
     case title
@@ -96,7 +93,7 @@ public class RowEntity: NSObject {
     internal var preCurrectDate: Date = Date.init(timeIntervalSince1970: 0)
     @objc dynamic public var date: Date = Date.init(timeIntervalSince1970: 0)
     /// 用户自定义数据, 比如用来控制颜色或者其他
-    public var customEntity: CustomEntityType = EmptyCustomEntity()
+    public var customEntity: BaseCustomEntity!
     
     public var indexPath: IndexPath = IndexPath(row: -1, section: -1)
     
@@ -306,6 +303,13 @@ extension RowEntity {
         }
         
         return false
+    }
+    
+    /// Reload 该 model 对应的 Cell
+    public func reload(_ animation: UITableViewRowAnimation = .fade) -> Void {
+        if let dataCen = dataCenter {
+            dataCen.tableView.reloadRows(at: [indexPath], with: animation)
+        }
     }
 }
 

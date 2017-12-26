@@ -136,7 +136,6 @@ public extension UniversalPlistTableView {
     public func install(plist plistName: String, inBundle bundle: Bundle?) throws {
         plistHelper = try PlistHelper(plist: plistName, inBundle: bundle)
         tableViewModel.dataCenter.sectionList = plistHelper.getSectionList()
-        tableViewModel.reloadData()
         
         sectionList.valueChanged.bind(to: valueChanged).disposed(by: disposeBag)
         sectionList.valueChangedVerifyPassed(inVerificaitons: dataCenter.verifiers).bind(to: valueChangedFilted).disposed(by: disposeBag)

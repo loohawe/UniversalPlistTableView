@@ -36,6 +36,8 @@ public class SectionEntity: NSObject {
     public var section: Int = -1
     public var rows: [RowEntity] = []
     
+    internal weak var dataCenter: TableViewDataCenter?
+    
     override public func setValuesForKeys(_ keyedValues: [String : Any]) {
         
         var mutableDic = keyedValues
@@ -72,6 +74,14 @@ public class SectionEntity: NSObject {
     public convenience init(withDictionary dic: [String : Any]) {
         self.init()
         setValuesForKeys(dic)
+    }
+    
+    /// Reload 该 section 对应的 Cells
+    public func reload(_ animation: UITableViewRowAnimation = .fade) -> Void {
+        if let dataCen = dataCenter {
+            let indexPathList = rows.map { $0.indexPath }
+            dataCen.tableView.reloadRows(at: indexPathList, with: animation)
+        }
     }
     
     deinit {
