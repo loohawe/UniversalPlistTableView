@@ -176,6 +176,7 @@ public extension UniversalPlistTableView {
     }
     
     /// Reload cell
+    /// Reload 某个 key 的 cell
     public func reloadCell(_ indexKey: String, with animation: UITableViewRowAnimation = .fade) {
         let rowIndex = key(indexKey).indexPath
         if rowIndex.section != -1 {
@@ -183,6 +184,7 @@ public extension UniversalPlistTableView {
         }
     }
     
+    /// Reload 某些 key 的 cell
     public func reloadCell(_ indexKey: [Any], with animation: UITableViewRowAnimation = .fade) {
         var indexPathList: [IndexPath] = []
         indexKey.forEach { (item) in
@@ -194,6 +196,7 @@ public extension UniversalPlistTableView {
         tableView.reloadRows(at: indexPathList, with: animation)
     }
     
+    /// Reload cell, 该 cell 的 key 对应入参 Dic 中的 Key
     public func reloadCell(_ indexKey: [String : Any], with animation: UITableViewRowAnimation = .fade) {
         var indexPathList: [IndexPath] = []
         indexKey.enumerated()
@@ -207,6 +210,28 @@ public extension UniversalPlistTableView {
                 }
             }
         tableView.reloadRows(at: indexPathList, with: animation)
+    }
+    
+    /// 设置某个 Section 是否可编辑
+    public func section(_ sectionIndex: Int, isEditable isEdit: Bool) {
+        guard sectionIndex < dataCenter.sectionList.count else {
+            debugPrint("找不到下标为 \(sectionIndex) 的 Section, 可能越界")
+            return
+        }
+        dataCenter.sectionList[sectionIndex].rows.forEach { (row) in
+            row.isEditable = isEdit
+        }
+    }
+    
+    /// 设置某个 Section 是否可点击
+    public func section(_ sectionIndex: Int, isClicked isClick: Bool) {
+        guard sectionIndex < dataCenter.sectionList.count else {
+            debugPrint("找不到下标为 \(sectionIndex) 的 Section, 可能越界")
+            return
+        }
+        dataCenter.sectionList[sectionIndex].rows.forEach { (row) in
+            row.isClicked = isClick
+        }
     }
 }
 

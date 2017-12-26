@@ -85,8 +85,10 @@ class ViewController: UIViewController {
             "nothing": 0.001
             ]).reload()
         
-        tableView.key("age").isEditable = false
-        tableView.key("name").isClicked = false
+        tableView.section(0, isClicked: false)
+        tableView.section(0, isEditable: false)
+//        tableView.key("age").isEditable = false
+//        tableView.key("name").isClicked = false
     }
 }
 
