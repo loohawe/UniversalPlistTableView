@@ -17,7 +17,7 @@
 				<key>identifier</key>
 				<string>titleInputCellIdentifier</string>
 				<key>accessoryType</key>
-				<integer>0</integer>
+				<integer>2</integer>
 				<key>height</key>
 				<integer>60</integer>
 				<key>title</key>
@@ -35,7 +35,7 @@
 				<key>isEditable</key>
 				<true/>
 				<key>keyboardType</key>
-				<integer>0</integer>
+				<integer>5</integer>
 				<key>inputPlaceHolder</key>
 				<string>请输入</string>
 				<key>inputVerificationRegex</key>
@@ -57,7 +57,7 @@
 				<key>identifier</key>
 				<string>titleInputCellIdentifier</string>
 				<key>accessoryType</key>
-				<integer>0</integer>
+				<integer>3</integer>
 				<key>height</key>
 				<real>60</real>
 				<key>title</key>
@@ -75,7 +75,7 @@
 				<key>isEditable</key>
 				<true/>
 				<key>keyboardType</key>
-				<integer>6</integer>
+				<integer>5</integer>
 				<key>inputPlaceHolder</key>
 				<string>请输入</string>
 				<key>inputVerificationRegex</key>

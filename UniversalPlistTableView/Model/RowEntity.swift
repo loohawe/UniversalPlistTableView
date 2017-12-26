@@ -31,7 +31,7 @@ public class RowEntity: NSObject {
     
     /// Plist data
     @objc public var identifier: String = ""
-    public var accessoryType: UITableViewCellAccessoryType = .none
+    @objc dynamic public var accessoryType: UITableViewCellAccessoryType = .none
     @objc public var height: Double = 44.0
     public var rawTitle: String = "" {
         didSet {
@@ -77,7 +77,7 @@ public class RowEntity: NSObject {
     @objc public var isRequired: Bool = false /// 是否要求必填
     @objc dynamic public var isClicked: Bool = true /// cell 是否可点击
     @objc dynamic public var isEditable: Bool = true /// cell 的 subview 是否可编辑
-    @objc public var keyboardType: UIKeyboardType = .default
+    @objc dynamic public var keyboardType: UIKeyboardType = .default
     @objc public var inputPlaceHolder: String = ""
     @objc public var inputVerificationRegex: String = ""
     @objc public var inputVerificationMaxCount: Int = -1
@@ -93,7 +93,7 @@ public class RowEntity: NSObject {
     internal var preCurrectDate: Date = Date.init(timeIntervalSince1970: 0)
     @objc dynamic public var date: Date = Date.init(timeIntervalSince1970: 0)
     /// 用户自定义数据, 比如用来控制颜色或者其他
-    public var customEntity: BaseCustomEntity!
+    public var customEntity: CustomEntityType?
     
     public var indexPath: IndexPath = IndexPath(row: -1, section: -1)
     
@@ -104,12 +104,18 @@ public class RowEntity: NSObject {
     public weak var dataCenter: TableViewDataCenter? {
         didSet {
             dataCenterDisposeBag = DisposeBag()
-            if let _ = dataCenter {
-                /// 把验证器拿出来
-                /// 把最后一次验证通过的值存下来
+            if let unwrapDataCenter = dataCenter {
+                
+                /// 每次验证的时候存一下上次正确的值
                 beforeVerifyStoreCurrect()
                 /// 验证不通过时, 通知到 Handle
                 verifiedFailedImplement()
+                
+                guard let customType = unwrapDataCenter.customModelTypes[identifier] else {
+                    fatalError("DataCenter 中 customModelTypes 里存入了非 BaseCustomEntity 的子类")
+                }
+                customEntity = customType.init()
+                customEntity!.rowEntity = self
             }
         }
     }
@@ -293,7 +299,7 @@ extension RowEntity {
             if let handle: (((ValueType, RowEntity)) -> Void) = handleBox.implement(identifier: identifier) {
                 /// 自定义事件
                 if let keyPath = identifier.keyPath {
-                    let keyPathValue = self[keyPath: keyPath]
+                    let keyPathValue = self.customEntity[keyPath: keyPath]
                     if let nowValue = keyPathValue as? ValueType {
                         handle((nowValue, shadowSelf))
                         return true
@@ -306,10 +312,21 @@ extension RowEntity {
     }
     
     /// Reload 该 model 对应的 Cell
-    public func reload(_ animation: UITableViewRowAnimation = .fade) -> Void {
+    public func reload(_ animation: UITableViewRowAnimation = .fade) {
         if let dataCen = dataCenter {
             dataCen.tableView.reloadRows(at: [indexPath], with: animation)
         }
+    }
+    
+    /// 更新该 RowEntity 的 Custom Entity
+    /// 并 reload 对应的 Cell
+    public func updateCustomModel<CustomType>(handle: ((CustomType) -> Void) = { _ in }) where CustomType: BaseCustomEntity {
+        guard let unwrapCustom = customEntity as? CustomType else {
+            fatalError("RowEntity 的 customEntity 必须是 BaseCustomEntity 的子类")
+        }
+        /// 修改 CustomEntity
+        handle(unwrapCustom)
+        reload()
     }
 }
 

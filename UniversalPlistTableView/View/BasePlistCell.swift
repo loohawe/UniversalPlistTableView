@@ -42,8 +42,10 @@ open class BasePlistCell: UITableViewCell, PlistCellProtocol {
         debugPrint("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
     }
     
-    open func provideCustomModel() -> CustomEntityType {
-        return BaseCustomEntity()
+    /// Original custom cell model
+    /// 自定义的 Cell model, 其中初始值会初始化到 Cell 上.
+    open class func customModelType() -> CustomEntityType.Type {
+        return BaseCustomEntity.self
     }
     
     open func bindCellModel(_ model: RowEntity) -> Void {
@@ -132,10 +134,23 @@ open class BasePlistCell: UITableViewCell, PlistCellProtocol {
                 })
             })
             .disposed(by: disposeBag)
+        
+        /// 设置 Cell 的 accessoryType
+        self.accessoryType = model.accessoryType
+        
+        /// 设置 Cell 的键盘类型
+        self.contentView.subviews.forEach({ (itemView) in
+            if let someTextField = itemView as? UITextField {
+                someTextField.keyboardType = model.keyboardType
+            } else if let someTextView = itemView as? UITextView {
+                someTextView.keyboardType = model.keyboardType
+            }
+        })
     }
     
-    open func updateCell(withCustomProperty property: CustomEntityType) -> Void {
-        /// Override this method to implement your custom behavior
-        
+    /// Cell custom model
+    /// 从这里更新你自定义的属性, 比如 cell 背景色, cell 被点击了等等.
+    open func updateCell(_ rowModel: RowEntity, _ customModel: CustomEntityType) -> Void {
+        /// 做一些自定义的操作
     }
 }

@@ -33,13 +33,19 @@ class ViewController: UIViewController {
                 debugPrint("\n\(previousCurrentValue)\n\(nowValue)\n\(row)\n")
         }
         
-        let rowEntity = tableView.key("name")
-        rowEntity.verifyFailedHandle(\RowEntity.inputText) { (previousCurrentValue, nowValue, row) in
+        tableView.key("name").verifyFailedHandle(\RowEntity.inputText) { (previousCurrentValue, nowValue, row) in
             debugPrint("\n\(previousCurrentValue)\n\(nowValue)\n\(row)\n")
         }
         
         tableView.key("age").clickHandle { [unowned self] (row) in
             self.tableView.key("name").inputText = "abcdef"
+            self.tableView.key("favo").updateCustomModel(handle: { (item: TitleInputFace) in
+                item.backgroundColor = UIColor.red
+            })
+        }
+        
+        tableView.key("favo").customEvent(\TitleInputFace.fireAction) { (newValue: Any?, rowItem: RowEntity) in
+            print("\n\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\(newValue)\n\(rowItem)")
         }
         
         /**
@@ -72,6 +78,7 @@ class ViewController: UIViewController {
     @IBAction func commitInfoAction(_ sender: UIButton) {
         //debugPrint(tableView.extractCommitInfomation())
         debugPrint(tableView.commitInputText())
+        tableView.key("name").accessoryType = .detailButton
         
 //        tableView.fillingRow(property: .title, with: [
 //            "name": "大名",
@@ -80,13 +87,13 @@ class ViewController: UIViewController {
 //            "nothing": 0.001
 //            ])
         
-        tableView.fillingRow(property: .desc, with: [
-            "favo": "当我在跑步的时候我在想什么",
-            "nothing": 0.001
-            ]).reload()
+//        tableView.fillingRow(property: .desc, with: [
+//            "favo": "当我在跑步的时候我在想什么",
+//            "nothing": 0.001
+//            ]).reload()
         
-        tableView.section(0, isClicked: false)
-        tableView.section(0, isEditable: false)
+//        tableView.section(0, isClicked: false)
+//        tableView.section(0, isEditable: false)
 //        tableView.key("age").isEditable = false
 //        tableView.key("name").isClicked = false
     }

@@ -8,11 +8,7 @@
 import UIKit
 import RxSwift
 
-public protocol PlistCellProtocol {
-    
-    /// Original custom cell model
-    /// 自定义的 Cell model, 其中初始值会初始化到 Cell 上.
-    func provideCustomModel() -> CustomEntityType
+public protocol PlistCellProtocol: NSObjectProtocol {
     
     /// Cell bind to cellModel
     /// 从这里你要 Bind 相关属性到你的 Cell 上
@@ -20,7 +16,7 @@ public protocol PlistCellProtocol {
     
     /// Cell custom model
     /// 从这里更新你自定义的属性, 比如 cell 背景色, cell 被点击了等等.
-    func updateCell(withCustomProperty property: CustomEntityType) -> Void
+    func updateCell(_ rowModel: RowEntity, _ customModel: CustomEntityType) -> Void
     
 }
 

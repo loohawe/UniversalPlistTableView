@@ -9,9 +9,19 @@ import Foundation
 
 public protocol CustomEntityType {
     init()
+    weak var rowEntity: RowEntity! { get set }
 }
 
 public class BaseCustomEntity: CustomEntityType {
     required public init() { }
-    final weak var rowEntity: RowEntity!
+    public weak var rowEntity: RowEntity!
+    
+    /// 在这里更新 CustomModel
+    final public func update<RootType, ValueType>(_ keyPath: KeyPath<RootType, ValueType>, _ handle: (() -> Void) = { }) {
+        handle()
+        rowEntity.updateCustomModel()
+        let handIdenfitier = HandleIdentifier(type: CellEventType.custom, keyPath: keyPath)
+        rowEntity.implementHandle(withIdentifier: handIdenfitier)
+    }
 }
+

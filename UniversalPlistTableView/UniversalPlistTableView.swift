@@ -143,11 +143,16 @@ public extension UniversalPlistTableView {
     
     /// Regist Cell
     /// 注册新的 cell
-    public func regist<CellType>(cellClass aCell: CellType.Type, forIdentifier identifier: String) where CellType: UITableViewCell, CellType: PlistCellProtocol {
+    public func regist<CellType: BasePlistCell>(cellClass aCell: CellType.Type, forIdentifier identifier: String) {
+        registCustomModelTyle(aCell, withIdentifier: identifier)
         tableView.register(aCell, forCellReuseIdentifier: identifier)
     }
     
     public func regist(_ nib: UINib?, forIdentifier identifier: String) {
+        guard let nibInstance: BasePlistCell = nib?.instantiate(withOwner: nil, options: nil).first as? BasePlistCell else {
+            fatalError("注册的 Cell 必须要继承于 BasePlistCell")
+        }
+        registCustomModelTyle(type(of: nibInstance), withIdentifier: identifier)
         tableView.register(nib, forCellReuseIdentifier: identifier)
     }
     
@@ -237,15 +242,22 @@ public extension UniversalPlistTableView {
 // MARK: - Private Method
 extension UniversalPlistTableView {
     
-    fileprivate func privateInit() {
+    private func privateInit() {
         reinitTableView()
     }
     
+    /// 重新初始化 tableView
     private func reinitTableView() {
         addSubview(tableViewModel.tableView)
         tableViewModel.tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+    }
+    
+    /// 注册自定义的数据类型
+    private func registCustomModelTyle(_ cellType: BasePlistCell.Type, withIdentifier identifier: String) {
+        let customType = cellType.customModelType()
+        dataCenter.customModelTypes[identifier] = customType
     }
 }
 

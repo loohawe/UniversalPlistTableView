@@ -87,9 +87,12 @@ extension TableViewModel: UITableViewDataSource {
         let rowModel = pickupRow(indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: rowModel.identifier, for: indexPath)
         guard let plistCell = cell as? BasePlistCell else {
-            fatalError("🐼🐼🐼UniversalPlistTableViewCell must coform protocol: PlistCellProtocol\n🐼🐼🐼我的超级牛逼无敌 Plist table view 注册的 Cell 必须实现协议 PlistCellProtocol, 不实现就不让你用哟, 我的哥")
+            fatalError("🐼🐼🐼UniversalPlistTableViewCell must coform protocol: PlistCellProtocol\n🐼🐼🐼 Plist table view 注册的 Cell 必须继承自 BasePlistCell")
         }
         plistCell.bindCellModel(rowModel)
+        if let unwrapCustom = rowModel.customEntity {
+            plistCell.updateCell(rowModel, unwrapCustom)
+        }
         return cell
     }
     
@@ -128,6 +131,8 @@ extension TableViewModel {
         reinitTableView()
         /// 注册预设的验证器
         registPresetVerifier()
+        /// 注册预设的自定义数据类型
+        registPresetCustomModel()
     }
     
     /// 重新初始化 tableView, 注意这个方法里 tableview 可能为空
@@ -161,6 +166,15 @@ extension TableViewModel {
         regist(verificationClass: CharacterCountVerifier(), forSegue: "characterCountVerify")
     }
     
+    /// 注册自定义的数据类型
+    private func registPresetCustomModel() {
+        let type1 = TitleInputCell.customModelType()
+        dataCenter.customModelTypes[CONST_titleInputCellIdentifier] = type1
+        
+        let type2 = TitleInputFreeHeight.customModelType()
+        dataCenter.customModelTypes[CONST_titleInputFreeHeightIdentifier] = type2
+    }
+    
     fileprivate func pickupRow(_ indexPath: IndexPath) -> RowEntity {
         sectionList[indexPath.section].section = indexPath.section
         sectionList[indexPath.section].rows[indexPath.row].indexPath = indexPath
@@ -186,7 +200,7 @@ extension TableViewModel {
         secList
             .valueChangedVerifyFailed(inVerificaitons: dataCenter.verifiers)
             .subscribe(onNext: { (rowItem) in
-                if let cellItem = self.tableView.cellForRow(at: rowItem.indexPath) {
+                if self.tableView.cellForRow(at: rowItem.indexPath) != nil {
                     
                 }
             })

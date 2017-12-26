@@ -28,8 +28,13 @@ public class TableViewDataCenter: NSObject {
             tableView.reloadData()
         }
     }
+    
     /// 这里都是过滤器
     var verifiers: [String : ValidatorType] = [:]
+    
+    /// 这里都是自定义的数据
+    /// Key 为 cell 的 identifier, value 为 cell custom model 的 type
+    var customModelTypes: [String : CustomEntityType.Type] = [:]
     
     init(sectionList list: [SectionEntity]) {
         super.init()
@@ -37,6 +42,8 @@ public class TableViewDataCenter: NSObject {
     }
     
     deinit {
+        verifiers.removeAll()
+        customModelTypes.removeAll()
         debugPrint("deinit:🐔🐔🐔🐔🐔🐔🐔🐔🐔🐔\(type(of: self))")
     }
 }
