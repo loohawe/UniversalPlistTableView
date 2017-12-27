@@ -100,6 +100,9 @@ public class RowEntity: NSObject {
     /// 所有的回调
     public var handleBox: HandleBox = HandleBox()
     
+    /// 结束编辑的信号
+    public var endEdit: PublishSubject<RowEntity> = PublishSubject()
+    
     /// 弱持有所有的数据
     public weak var dataCenter: TableViewDataCenter? {
         didSet {

@@ -193,6 +193,7 @@ open class BasePlistCell: UITableViewCell, PlistCellProtocol {
             .controlEvent(UIControlEvents.editingDidEnd)
             .subscribe(onNext: { [weak model] () in
                 guard let `model` = model else { return }
+                model.endEdit.onNext(model)
                 model.activateVerifiorHandle()
             })
             .disposed(by: disposeBag)
@@ -223,6 +224,7 @@ open class BasePlistCell: UITableViewCell, PlistCellProtocol {
         someTextView.rx.didEndEditing
             .subscribe(onNext: { [weak model] () in
                 guard let `model` = model else { return }
+                model.endEdit.onNext(model)
                 model.activateVerifiorHandle()
             })
             .disposed(by: disposeBag)

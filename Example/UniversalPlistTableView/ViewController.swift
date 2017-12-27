@@ -33,6 +33,9 @@ class ViewController: UIViewController {
         nameCellModel.verifyFailedHandle(\RowEntity.inputText) { (previousCurrentValue, nowValue, row) in
             debugPrint("Name Cell 验证失败:\n\(previousCurrentValue)\n\(nowValue)\n\(row)\n------------------")
         }
+        nameCellModel.endEdit.subscribe(onNext: { (row) in
+            debugPrint("aaaa")
+        }).disposed(by: disposeBag)
         
         let phoneCellModel = tableView.key("phone")
         phoneCellModel.verifyFailedHandle(\RowEntity.inputText) { (previousCurrentValue, nowValue, row) in
