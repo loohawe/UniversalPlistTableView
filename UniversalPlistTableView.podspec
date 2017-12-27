@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'UniversalPlistTableView/**/*.{h,m,swift}'
-  s.resource = "UniversalPlistTableView/Images.xcassets"
+#s.resource = "UniversalPlistTableView/Images.xcassets"
   s.resource_bundles = {
     'Resources' => ['UniversalPlistTableView/**/*.{png,xib,plist}']
   }
