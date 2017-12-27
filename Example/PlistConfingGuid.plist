@@ -4,28 +4,28 @@
 <array>
 	<dict>
 		<key>headerTitle</key>
-		<string>基本信息</string>
+		<string> </string>
 		<key>headerHeight</key>
-		<integer>44</integer>
+		<real>0.1</real>
 		<key>footerTitle</key>
-		<string>🎠🎠🎠🎠🎠🎠🎠🎠🎠🎠</string>
+		<string> </string>
 		<key>footerHeight</key>
-		<integer>30</integer>
+		<real>0.1</real>
 		<key>rows</key>
 		<array>
 			<dict>
 				<key>identifier</key>
-				<string>titleInputCellIdentifier</string>
+				<string>titleDescImageCellIdentifier</string>
 				<key>accessoryType</key>
-				<integer>2</integer>
+				<integer>0</integer>
 				<key>height</key>
-				<integer>60</integer>
+				<integer>98</integer>
 				<key>title</key>
-				<string>姓名</string>
+				<string>豪华装修, 附带地暖与车位, 附带地暖与车位, 附带地暖与车位,</string>
 				<key>subTitle</key>
-				<string>{&quot;content&quot;: &quot;描述&quot;, &quot;fontSize&quot;: 15.0, &quot;color&quot;: &quot;9090a0&quot;}</string>
+				<string>静安区-美丽珊花园小区</string>
 				<key>description</key>
-				<string></string>
+				<string>整租, 6000 元/月</string>
 				<key>inputText</key>
 				<string></string>
 				<key>isRequired</key>
@@ -41,9 +41,89 @@
 				<key>inputVerificationRegex</key>
 				<string>Regular Express String</string>
 				<key>inputVerificationMaxCount</key>
-				<integer>6</integer>
+				<integer>0</integer>
 				<key>inputVerificationDeferedMessage</key>
 				<string>请输入姓名</string>
+				<key>commitKey</key>
+				<string></string>
+				<key>leadingIcon</key>
+				<string></string>
+				<key>trailingIcon</key>
+				<string></string>
+				<key>verificationSegue</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>identifier</key>
+				<string>checkTimeCellIdentifier</string>
+				<key>accessoryType</key>
+				<integer>0</integer>
+				<key>height</key>
+				<integer>44</integer>
+				<key>title</key>
+				<string>看房时间</string>
+				<key>subTitle</key>
+				<string>2017-11-12 10:30</string>
+				<key>description</key>
+				<string></string>
+				<key>inputText</key>
+				<string></string>
+				<key>isRequired</key>
+				<true/>
+				<key>isClicked</key>
+				<true/>
+				<key>isEditable</key>
+				<true/>
+				<key>keyboardType</key>
+				<integer>5</integer>
+				<key>inputPlaceHolder</key>
+				<string></string>
+				<key>inputVerificationRegex</key>
+				<string></string>
+				<key>inputVerificationMaxCount</key>
+				<integer>0</integer>
+				<key>inputVerificationDeferedMessage</key>
+				<string></string>
+				<key>commitKey</key>
+				<string>date</string>
+				<key>leadingIcon</key>
+				<string></string>
+				<key>trailingIcon</key>
+				<string></string>
+				<key>verificationSegue</key>
+				<string>AgeGreaterVerifier</string>
+			</dict>
+			<dict>
+				<key>identifier</key>
+				<string>titleInputCellIdentifier</string>
+				<key>accessoryType</key>
+				<integer>0</integer>
+				<key>height</key>
+				<integer>44</integer>
+				<key>title</key>
+				<string>租客</string>
+				<key>subTitle</key>
+				<string></string>
+				<key>description</key>
+				<string></string>
+				<key>inputText</key>
+				<string></string>
+				<key>isRequired</key>
+				<true/>
+				<key>isClicked</key>
+				<false/>
+				<key>isEditable</key>
+				<true/>
+				<key>keyboardType</key>
+				<integer>5</integer>
+				<key>inputPlaceHolder</key>
+				<string>请输入您的姓名</string>
+				<key>inputVerificationRegex</key>
+				<string>Regular Express String</string>
+				<key>inputVerificationMaxCount</key>
+				<integer>5</integer>
+				<key>inputVerificationDeferedMessage</key>
+				<string></string>
 				<key>commitKey</key>
 				<string>name</string>
 				<key>leadingIcon</key>
@@ -51,19 +131,19 @@
 				<key>trailingIcon</key>
 				<string></string>
 				<key>verificationSegue</key>
-				<string>characterCountVerify</string>
+				<string></string>
 			</dict>
 			<dict>
 				<key>identifier</key>
-				<string>titleInputCellIdentifier</string>
+				<string>checkTimeCellIdentifier</string>
 				<key>accessoryType</key>
-				<integer>3</integer>
+				<integer>0</integer>
 				<key>height</key>
-				<real>60</real>
+				<integer>44</integer>
 				<key>title</key>
-				<string>年龄</string>
+				<string>联系方式</string>
 				<key>subTitle</key>
-				<string></string>
+				<string>13122334455</string>
 				<key>description</key>
 				<string></string>
 				<key>inputText</key>
@@ -71,9 +151,9 @@
 				<key>isRequired</key>
 				<true/>
 				<key>isClicked</key>
-				<true/>
+				<false/>
 				<key>isEditable</key>
-				<true/>
+				<false/>
 				<key>keyboardType</key>
 				<integer>5</integer>
 				<key>inputPlaceHolder</key>
@@ -81,52 +161,52 @@
 				<key>inputVerificationRegex</key>
 				<string>Regular Express String</string>
 				<key>inputVerificationMaxCount</key>
-				<integer>4</integer>
+				<integer>11</integer>
 				<key>inputVerificationDeferedMessage</key>
-				<string>请输入年龄</string>
+				<string></string>
 				<key>commitKey</key>
-				<string>age</string>
+				<string>phone</string>
 				<key>leadingIcon</key>
 				<string></string>
 				<key>trailingIcon</key>
 				<string></string>
 				<key>verificationSegue</key>
-				<string>characterCountVerify</string>
+				<string>AgeGreaterVerifier</string>
 			</dict>
 		</array>
 	</dict>
 	<dict>
 		<key>headerTitle</key>
-		<string>补充信息</string>
+		<string> </string>
 		<key>headerHeight</key>
-		<integer>44</integer>
+		<integer>10</integer>
 		<key>footerTitle</key>
-		<string>🎠🎠🎠🎠🎠🎠🎠🎠🎠🎠</string>
+		<string> </string>
 		<key>footerHeight</key>
-		<integer>30</integer>
+		<integer>10</integer>
 		<key>rows</key>
 		<array>
 			<dict>
 				<key>identifier</key>
-				<string>titleInputFreeHeightIdentifier</string>
+				<string>discussCellIdentifier</string>
 				<key>accessoryType</key>
 				<integer>0</integer>
 				<key>height</key>
-				<integer>-1</integer>
+				<integer>198</integer>
 				<key>title</key>
-				<string>石黑一雄</string>
+				<string>看房体验</string>
 				<key>subTitle</key>
 				<string></string>
 				<key>description</key>
-				<string>A Pale View of Hills是石黑一雄处女作，一部问世30年仍在不断重印的名作。小说通过一个移居英国的日本寡妇对故土、故人的回忆，讲述了战后长崎一对饱受磨难的母女渴望安定与新生，却始终走不出战乱带来的阴影与心魔，最终以母女成功移民，而女儿自尽作为悲情结局。作品构思奇特，叙述者通篇的回忆是模糊而可疑的，直至全书终，叙述者才忘记了伪装，读者也证实了猜想：叙述者是利用回忆做掩护，编织了一个他人的故事，企图通过他人的面具来讲述自己的故事，以减轻罪恶感。</string>
+				<string></string>
 				<key>inputText</key>
-				<string>查看详情</string>
+				<string>这里是我的评论那</string>
 				<key>isRequired</key>
 				<false/>
 				<key>isClicked</key>
 				<false/>
 				<key>isEditable</key>
-				<false/>
+				<true/>
 				<key>keyboardType</key>
 				<integer>0</integer>
 				<key>inputPlaceHolder</key>
@@ -134,15 +214,15 @@
 				<key>inputVerificationRegex</key>
 				<string>Regular Express String</string>
 				<key>inputVerificationMaxCount</key>
-				<integer>5</integer>
+				<integer>0</integer>
 				<key>inputVerificationDeferedMessage</key>
 				<string></string>
 				<key>commitKey</key>
-				<string>favo</string>
+				<string>comment</string>
 				<key>leadingIcon</key>
-				<string>SmallIcon</string>
+				<string></string>
 				<key>trailingIcon</key>
-				<string>CryIcon</string>
+				<string></string>
 				<key>verificationSegue</key>
 				<string></string>
 			</dict>

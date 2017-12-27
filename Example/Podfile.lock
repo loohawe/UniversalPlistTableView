@@ -15,7 +15,7 @@ PODS:
     - RxSwift (~> 4.0)
   - RxSwift (4.0.0)
   - SnapKit (4.0.0)
-  - UniversalPlistTableView (0.1.2):
+  - UniversalPlistTableView (0.1.4):
     - RxCocoa
     - RxSwift
     - SnapKit
@@ -39,7 +39,7 @@ SPEC CHECKSUMS:
   RxCocoa: d62846ca96495d862fa4c59ea7d87e5031d7340e
   RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
-  UniversalPlistTableView: e449546590b1a9ee1157a8764b68c6f496e2b749
+  UniversalPlistTableView: a3cf1f036f8a8956e07c03dbfc6ef0a15b18b538
 
 PODFILE CHECKSUM: 34deff8c8fd85063041c0a419d51cab568746b41
 

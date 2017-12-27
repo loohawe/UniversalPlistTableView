@@ -10,8 +10,8 @@ import RxSwift
 
 public class TitleInputCell: BasePlistCell {
 
-    @IBOutlet public weak var titleLabel: UILabel!
-    @IBOutlet public weak var inputTextField: UITextField!
+    @IBOutlet public weak var up_titleLabel: UILabel!
+    @IBOutlet public weak var up_inputTextField: UITextField!
     
     
 }

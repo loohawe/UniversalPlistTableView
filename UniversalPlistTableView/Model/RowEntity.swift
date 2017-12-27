@@ -108,8 +108,9 @@ public class RowEntity: NSObject {
                 
                 /// 每次验证的时候存一下上次正确的值
                 beforeVerifyStoreCurrect()
+                /// 触发验证的逻辑改为 textFied didEndEdit 的时候
                 /// 验证不通过时, 通知到 Handle
-                verifiedFailedImplement()
+                //verifiedFailedImplement()
                 
                 guard let customType = unwrapDataCenter.customModelTypes[identifier] else {
                     fatalError("DataCenter 中 customModelTypes 里存入了非 BaseCustomEntity 的子类")
@@ -227,6 +228,7 @@ extension RowEntity {
     }
     
     /// 验证不通过时, 通知到 Handle
+    /**
     private func verifiedFailedImplement() {
         
         /// 触发验证
@@ -248,7 +250,7 @@ extension RowEntity {
                 self.implementHandle(withIdentifier: identifier)
             })
             .disposed(by: dataCenterDisposeBag)
-    }
+    }**/
     
     /// 触发 InputText 的验证
     private func verifyInputText() {
@@ -320,13 +322,22 @@ extension RowEntity {
     
     /// 更新该 RowEntity 的 Custom Entity
     /// 并 reload 对应的 Cell
-    public func updateCustomModel<CustomType>(handle: ((CustomType) -> Void) = { _ in }) where CustomType: BaseCustomEntity {
+    public func updateCustomModel<CustomType>(_ animation: UITableViewRowAnimation = .fade, handle: ((CustomType) -> Void) = { _ in }) where CustomType: BaseCustomEntity {
         guard let unwrapCustom = customEntity as? CustomType else {
             fatalError("RowEntity 的 customEntity 必须是 BaseCustomEntity 的子类")
         }
         /// 修改 CustomEntity
         handle(unwrapCustom)
-        reload()
+        reload(animation)
+    }
+    
+    /// 触发验证的 Handle
+    public func activateVerifiorHandle() -> Void {
+        if !isVerified {
+            verifyInputText()
+            let identifier = HandleIdentifier(type: CellEventType.verified, keyPath: \RowEntity.date)
+            self.implementHandle(withIdentifier: identifier)
+        }
     }
 }
 

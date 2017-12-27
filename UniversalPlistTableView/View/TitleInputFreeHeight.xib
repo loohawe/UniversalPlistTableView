@@ -60,7 +60,7 @@
             <connections>
                 <outlet property="contentLabel" destination="x7W-5z-whR" id="R1s-Vz-vAc"/>
                 <outlet property="fireButton" destination="a2x-rj-Zd5" id="Mi7-y7-4Wv"/>
-                <outlet property="titleLabel" destination="p5J-xM-PGl" id="ya2-Bg-Kds"/>
+                <outlet property="up_titleLabel" destination="p5J-xM-PGl" id="LhE-Xm-80y"/>
             </connections>
             <point key="canvasLocation" x="-381" y="-88"/>
         </tableViewCell>

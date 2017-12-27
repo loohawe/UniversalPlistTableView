@@ -11,7 +11,7 @@ import RxSwift
 public class TitleInputFreeHeight: BasePlistCell {
     
     
-    @IBOutlet weak var titleLabel: UILabel!  /// 父类对这个属性做了绑定, 不用自己绑了
+    @IBOutlet weak var up_titleLabel: UILabel!  /// 父类对这个属性做了绑定, 不用自己绑了
     @IBOutlet weak var fireButton: UIButton! {
         didSet {
             

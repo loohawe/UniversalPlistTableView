@@ -21,8 +21,30 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         try! tableView.install(plist: "PlistConfingGuid", inBundle: nil)
-        tableView.style = UITableViewStyle.plain
+        //tableView.style = .plain
         
+        let dateCellModel = tableView.key("date")
+        dateCellModel.clickHandle { (row) in
+            debugPrint("选择时间啦")
+        }
+        dateCellModel.rx.subTitle.bind(to: dateCellModel.rx.inputText).disposed(by: disposeBag)
+        
+        let nameCellModel = tableView.key("name")
+        nameCellModel.verifyFailedHandle(\RowEntity.inputText) { (previousCurrentValue, nowValue, row) in
+            debugPrint("Name Cell 验证失败:\n\(previousCurrentValue)\n\(nowValue)\n\(row)\n------------------")
+        }
+        
+        let phoneCellModel = tableView.key("phone")
+        phoneCellModel.verifyFailedHandle(\RowEntity.inputText) { (previousCurrentValue, nowValue, row) in
+            debugPrint("Phone Cell 验证失败:\n\(previousCurrentValue)\n\(nowValue)\n\(row)\n------------------")
+        }
+        phoneCellModel.rx.subTitle.bind(to: phoneCellModel.rx.inputText).disposed(by: disposeBag)
+        
+        tableView.key("comment").customEvent(\CommitCellModel.commitAction) { [weak tableView] (newValue: Any?, rowItem: RowEntity) in
+            print("\(String(describing: tableView?.commitInputText()))")
+        }
+        
+        /**
         tableView
             .indexPath(IndexPath.init(row: 0, section: 0))
             .clickHandle { [unowned self] (rowEntity) in
@@ -30,11 +52,7 @@ class ViewController: UIViewController {
                 self.tableView.indexPath(IndexPath.init(row: 1, section: 0)).title = "沃的天"
             }
             .verifyFailedHandle(\RowEntity.inputText) { (previousCurrentValue, nowValue, row) in
-                debugPrint("\n\(previousCurrentValue)\n\(nowValue)\n\(row)\n")
-        }
-        
-        tableView.key("name").verifyFailedHandle(\RowEntity.inputText) { (previousCurrentValue, nowValue, row) in
-            debugPrint("\n\(previousCurrentValue)\n\(nowValue)\n\(row)\n")
+                debugPrint("第一个 Cell 验证失败:\n\(previousCurrentValue)\n\(nowValue)\n\(row)\n------------------")
         }
         
         tableView.key("age").clickHandle { [unowned self] (row) in
@@ -42,11 +60,13 @@ class ViewController: UIViewController {
             self.tableView.key("favo").updateCustomModel(handle: { (item: TitleInputFace) in
                 item.backgroundColor = UIColor.red
             })
+            }.verifyFailedHandle(\RowEntity.inputText) { (previousCurrentValue, nowValue, row) in
+                debugPrint("Age Cell 验证失败:\n\(previousCurrentValue)\n\(nowValue)\n\(row)\n------------------")
         }
         
         tableView.key("favo").customEvent(\TitleInputFace.fireAction) { (newValue: Any?, rowItem: RowEntity) in
             print("\n\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\(newValue)\n\(rowItem)")
-        }
+        }**/
         
         /**
         /// 配置 Cell
@@ -78,7 +98,6 @@ class ViewController: UIViewController {
     @IBAction func commitInfoAction(_ sender: UIButton) {
         //debugPrint(tableView.extractCommitInfomation())
         debugPrint(tableView.commitInputText())
-        tableView.key("name").accessoryType = .detailButton
         
 //        tableView.fillingRow(property: .title, with: [
 //            "name": "大名",

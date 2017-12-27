@@ -98,12 +98,12 @@ extension TableViewModel: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let sec = sectionList[section]
-        return sec.headerTitle
+        return sec.headerTitle.isEmpty ? " " : sec.headerTitle
     }
     
     public func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         let sec = sectionList[section]
-        return sec.footerTitle
+        return sec.footerTitle.isEmpty ? " " : sec.footerTitle
     }
 }
 
@@ -159,11 +159,21 @@ extension TableViewModel {
         
         let freeHeightCell = UINib(nibName: "TitleInputFreeHeight", bundle: BundleHelper.resourcesBundle())
         aTableView.register(freeHeightCell, forCellReuseIdentifier: CONST_titleInputFreeHeightIdentifier)
+        
+        let titleDescImage = UINib(nibName: "TitleDescImageCell", bundle: BundleHelper.resourcesBundle())
+        aTableView.register(titleDescImage, forCellReuseIdentifier: CONST_titleDescImageCellIdentifier)
+        
+        let checkTime = UINib(nibName: "CheckTimeCell", bundle: BundleHelper.resourcesBundle())
+        aTableView.register(checkTime, forCellReuseIdentifier: CONST_checkTimeCellIdentifier)
+        
+        let discuss = UINib(nibName: "DiscussCell", bundle: BundleHelper.resourcesBundle())
+        aTableView.register(discuss, forCellReuseIdentifier: CONST_discussCellIdentifier)
     }
     
     /// 注册预设的验证器
     private func registPresetVerifier() {
-        regist(verificationClass: CharacterCountVerifier(), forSegue: "characterCountVerify")
+        //regist(verificationClass: CharacterCountVerifier(), forSegue: "characterCountVerify")
+        regist(verificationClass: AgeGreaterVerifier(), forSegue: CONST_VERIFY_AgeGreaterVerifier)
     }
     
     /// 注册自定义的数据类型
@@ -173,6 +183,15 @@ extension TableViewModel {
         
         let type2 = TitleInputFreeHeight.customModelType()
         dataCenter.customModelTypes[CONST_titleInputFreeHeightIdentifier] = type2
+        
+        let type3 = TitleDescImageCell.customModelType()
+        dataCenter.customModelTypes[CONST_titleDescImageCellIdentifier] = type3
+        
+        let type4 = CheckTimeCell.customModelType()
+        dataCenter.customModelTypes[CONST_checkTimeCellIdentifier] = type4
+        
+        let type5 = DiscussCell.customModelType()
+        dataCenter.customModelTypes[CONST_discussCellIdentifier] = type5
     }
     
     fileprivate func pickupRow(_ indexPath: IndexPath) -> RowEntity {

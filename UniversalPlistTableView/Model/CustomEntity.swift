@@ -19,7 +19,7 @@ public class BaseCustomEntity: CustomEntityType {
     /// 在这里更新 CustomModel
     final public func update<RootType, ValueType>(_ keyPath: KeyPath<RootType, ValueType>, _ handle: (() -> Void) = { }) {
         handle()
-        rowEntity.updateCustomModel()
+        rowEntity.updateCustomModel(.none)
         let handIdenfitier = HandleIdentifier(type: CellEventType.custom, keyPath: keyPath)
         rowEntity.implementHandle(withIdentifier: handIdenfitier)
     }

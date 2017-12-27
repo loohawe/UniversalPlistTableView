@@ -12,6 +12,11 @@ import SnapKit
 
 public let CONST_titleInputCellIdentifier = "titleInputCellIdentifier"
 public let CONST_titleInputFreeHeightIdentifier = "titleInputFreeHeightIdentifier"
+public let CONST_titleDescImageCellIdentifier = "titleDescImageCellIdentifier"
+public let CONST_checkTimeCellIdentifier = "checkTimeCellIdentifier"
+public let CONST_discussCellIdentifier = "discussCellIdentifier"
+
+public let CONST_VERIFY_AgeGreaterVerifier = "AgeGreaterVerifier"
 
 public var VAR_DebugPrint: Bool = true
 internal func debugPrint(_ message: String) {
@@ -100,23 +105,33 @@ public extension UniversalPlistTableView {
     public func extractCommitInfomation() -> [String : Any] {
         var result: [String : Any] = [:]
         sectionList.flatMap { $0.rows }.forEach { (row) in
-            result[row.commitKey] = row.inputText
+            if !row.commitKey.isEmpty {
+                result[row.commitKey] = row.inputText
+            }
         }
         return result
     }
     
     /// 提交 tableView 中的信息, 并触发必填验证
-    public func commitInputText() -> (Bool, [String : Any]) {
-        return commit(property: .inputText)
+    public func commitInputText(_ keys: [String]? = nil) -> (Bool, [String : Any]) {
+        return commit(property: .inputText, keys: keys)
     }
     
     /// 提交 tableView 中制定的信息, 并触发必填验证
-    public func commit(property proName: RowEntityProperty) -> (Bool, [String : Any]) {
+    public func commit(property proName: RowEntityProperty, keys: [String]? = nil) -> (Bool, [String : Any]) {
         
         /// 把每个 Cell 里的值拿出来
         var info: [String : Any] = [:]
         sectionList.flatMap { $0.rows }.forEach { (row) in
-            info[row.commitKey] = row.value(forKey: proName.rawValue)
+            if !row.commitKey.isEmpty {
+                if let containtKeys = keys {
+                    if containtKeys.contains(row.commitKey) {
+                        info[row.commitKey] = row.value(forKey: proName.rawValue)
+                    }
+                } else {
+                    info[row.commitKey] = row.value(forKey: proName.rawValue)
+                }
+            }
         }
         
         /// 每个 cell 触发一次验证
