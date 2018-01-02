@@ -12,7 +12,7 @@ public protocol CustomEntityType {
     weak var rowEntity: RowEntity! { get set }
 }
 
-public class BaseCustomEntity: CustomEntityType {
+open class BaseCustomEntity: CustomEntityType {
     required public init() { }
     public weak var rowEntity: RowEntity!
     
