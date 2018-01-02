@@ -272,47 +272,68 @@ extension RowEntity {
     @discardableResult
     internal func implementHandle<RootType, ValueType>(withIdentifier identifier: HandleIdentifier<RootType, ValueType>) -> Bool {
         
-        /// 要传到 Block 里去, 弱持有一下
-        unowned let shadowSelf = self
-        
         switch identifier.type {
         case .click:
-            if let handle: RowEntityHandle = handleBox.implement(identifier: identifier) {
-                /// 点击 Cell 的事件
-                handle(shadowSelf)
-                return true
-            }
+            return implementClickHandle(withIdentifier: identifier)
+            
         case .verified:
-            if let handle: (((ValueType, ValueType, RowEntity)) -> Void) = handleBox.implement(identifier: identifier) {
-                /// 验证的事件
-                if let keyPath = identifier.keyPath {
-                    let keyPathValue = self[keyPath: keyPath]
-                    if keyPath == \RowEntity.inputText {
-                        if let previousVaule = self.preCurrectInputText as? ValueType, let nowVaule = keyPathValue as? ValueType {
-                            handle((previousVaule, nowVaule, shadowSelf))
-                            return true
-                        }
-                    } else if keyPath == \RowEntity.date {
-                        if let previousVaule = self.preCurrectDate as? ValueType, let nowVaule = keyPathValue as? ValueType {
-                            handle((previousVaule, nowVaule, shadowSelf))
-                            return true
-                        }
-                    }
-                }
-            }
+            return implementVerifiedHandle(withIdentifier: identifier)
+            
         case .custom:
-            if let handle: (((ValueType, RowEntity)) -> Void) = handleBox.implement(identifier: identifier) {
-                /// 自定义事件
-                if let keyPath = identifier.keyPath {
-                    let keyPathValue = self.customEntity[keyPath: keyPath]
-                    if let nowValue = keyPathValue as? ValueType {
-                        handle((nowValue, shadowSelf))
+            return implementCustomHandle(withIdentifier: identifier)
+        }
+    }
+    
+    /// 执行自定义事件
+    internal func implementClickHandle<RootType, ValueType>(withIdentifier identifier: HandleIdentifier<RootType, ValueType>) -> Bool {
+        if let handle: RowEntityHandle = handleBox.implement(identifier: identifier) {
+            /// 要传到 Block 里去, 弱持有一下
+            unowned let shadowSelf = self
+            /// 点击 Cell 的事件
+            handle(shadowSelf)
+            return true
+        }
+        return false
+    }
+    
+    /// 执行验证失败的事件
+    internal func implementVerifiedHandle<RootType, ValueType>(withIdentifier identifier: HandleIdentifier<RootType, ValueType>) -> Bool {
+        if let handle: (((ValueType, ValueType, RowEntity)) -> Void) = handleBox.implement(identifier: identifier) {
+            /// 要传到 Block 里去, 弱持有一下
+            unowned let shadowSelf = self
+            /// 验证的事件
+            if let keyPath = identifier.keyPath {
+                let keyPathValue = self[keyPath: keyPath]
+                if keyPath == \RowEntity.inputText {
+                    if let previousVaule = self.preCurrectInputText as? ValueType, let nowVaule = keyPathValue as? ValueType {
+                        handle((previousVaule, nowVaule, shadowSelf))
+                        return true
+                    }
+                } else if keyPath == \RowEntity.date {
+                    if let previousVaule = self.preCurrectDate as? ValueType, let nowVaule = keyPathValue as? ValueType {
+                        handle((previousVaule, nowVaule, shadowSelf))
                         return true
                     }
                 }
             }
         }
-        
+        return false
+    }
+    
+    /// 执行自定义事件
+    internal func implementCustomHandle<RootType, ValueType>(withIdentifier identifier: HandleIdentifier<RootType, ValueType>) -> Bool {
+        if let handle: (((ValueType, RowEntity)) -> Void) = handleBox.implement(identifier: identifier) {
+            /// 要传到 Block 里去, 弱持有一下
+            unowned let shadowSelf = self
+            /// 自定义事件
+            if let keyPath = identifier.keyPath {
+                let keyPathValue = self.customEntity[keyPath: keyPath]
+                if let nowValue = keyPathValue as? ValueType {
+                    handle((nowValue, shadowSelf))
+                    return true
+                }
+            }
+        }
         return false
     }
     
