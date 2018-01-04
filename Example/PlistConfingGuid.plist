@@ -28,6 +28,8 @@
 				<string>整租, 6000 元/月</string>
 				<key>inputText</key>
 				<string></string>
+				<key>isHidden</key>
+				<false/>
 				<key>isRequired</key>
 				<true/>
 				<key>isClicked</key>
@@ -68,6 +70,8 @@
 				<string></string>
 				<key>inputText</key>
 				<string></string>
+				<key>isHidden</key>
+				<false/>
 				<key>isRequired</key>
 				<true/>
 				<key>isClicked</key>
@@ -108,6 +112,8 @@
 				<string></string>
 				<key>inputText</key>
 				<string></string>
+				<key>isHidden</key>
+				<false/>
 				<key>isRequired</key>
 				<true/>
 				<key>isClicked</key>
@@ -148,6 +154,8 @@
 				<string></string>
 				<key>inputText</key>
 				<string></string>
+				<key>isHidden</key>
+				<false/>
 				<key>isRequired</key>
 				<true/>
 				<key>isClicked</key>
@@ -201,6 +209,8 @@
 				<string></string>
 				<key>inputText</key>
 				<string>这里是我的评论那</string>
+				<key>isHidden</key>
+				<false/>
 				<key>isRequired</key>
 				<false/>
 				<key>isClicked</key>

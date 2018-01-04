@@ -43,12 +43,16 @@ internal class TableViewModel: NSObject {
 }
 
 // MARK: - TableView Delegate
-extension TableViewModel: UITableViewDelegate {
+
+extension TableViewModel: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let rowModel = pickupRow(indexPath)
         if rowModel.height < 0 {
             return UITableViewAutomaticDimension
+        }
+        if rowModel.isHidden {
+            return 0.0
         }
         return CGFloat(rowModel.height)
     }
@@ -63,17 +67,27 @@ extension TableViewModel: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let sec = sectionList[section]
-        return CGFloat(sec.headerHeight)
+        var sectionHeight: CGFloat = 0
+        SectionLoop: for i in 0..<sec.rows.count {
+            if !sec.rows[i].isHidden {
+                sectionHeight = CGFloat(sec.headerHeight)
+                break SectionLoop
+            }
+        }
+        return sectionHeight
     }
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         let sec = sectionList[section]
-        return CGFloat(sec.footerHeight)
+        var sectionHeight: CGFloat = 0
+        SectionLoop: for i in 0..<sec.rows.count {
+            if !sec.rows[i].isHidden {
+                sectionHeight = CGFloat(sec.footerHeight)
+                break SectionLoop
+            }
+        }
+        return sectionHeight
     }
-    
-}
-
-extension TableViewModel: UITableViewDataSource {
     
     public func numberOfSections(in tableView: UITableView) -> Int {
         return sectionList.count
@@ -93,6 +107,7 @@ extension TableViewModel: UITableViewDataSource {
         if let unwrapCustom = rowModel.customEntity {
             plistCell.updateCell(rowModel, unwrapCustom)
         }
+        cell.isHidden = rowModel.isHidden
         return cell
     }
     

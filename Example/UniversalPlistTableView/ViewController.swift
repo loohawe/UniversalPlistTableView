@@ -26,6 +26,8 @@ class ViewController: UIViewController {
         let dateCellModel = tableView.key("date")
         dateCellModel.clickHandle { (row) in
             debugPrint("选择时间啦")
+            self.tableView.key("comment").isHidden = true
+            self.tableView.key("comment").reload()
         }
         dateCellModel.rx.subTitle.bind(to: dateCellModel.rx.inputText).disposed(by: disposeBag)
         

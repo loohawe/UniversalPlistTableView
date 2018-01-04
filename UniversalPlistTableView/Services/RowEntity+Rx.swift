@@ -69,6 +69,12 @@ extension Reactive where Base: RowEntity {
             self.base.isEditable = value
         })
     }
+    
+    public var isHidden: EntityInOut<Bool?> {
+        return value(keyPath: "isHidden", setter: { (value: Bool) in
+            self.base.isHidden = value
+        })
+    }
 }
 
 extension Reactive where Base: RowEntity {

@@ -74,6 +74,7 @@ public class RowEntity: NSObject {
     @objc dynamic public var inputText: String = ""
     @objc public var inputTextFont: UIFont?
     @objc public var inputTextColor: UIColor?
+    @objc dynamic public var isHidden: Bool = false /// 是否隐藏
     @objc public var isRequired: Bool = false /// 是否要求必填
     @objc dynamic public var isClicked: Bool = true /// cell 是否可点击
     @objc dynamic public var isEditable: Bool = true /// cell 的 subview 是否可编辑
@@ -260,29 +261,6 @@ extension RowEntity {
         let identifier: HandleIdentifier<RowEntity, String> = HandleIdentifier(type: CellEventType.verified, keyPath: \RowEntity.inputText)
         self.implementHandle(withIdentifier: identifier)
     }
-}
-
-// MARK: - Public method
-extension RowEntity {
-
-    /// 执行 RowEntity 中的 Handle
-    ///
-    /// - Parameter identifier: Handle 的 identifier
-    /// - Returns: Handle 存在并执行成功返回 True, 否则返回 False
-    @discardableResult
-    internal func implementHandle<RootType, ValueType>(withIdentifier identifier: HandleIdentifier<RootType, ValueType>) -> Bool {
-        
-        switch identifier.type {
-        case .click:
-            return implementClickHandle(withIdentifier: identifier)
-            
-        case .verified:
-            return implementVerifiedHandle(withIdentifier: identifier)
-            
-        case .custom:
-            return implementCustomHandle(withIdentifier: identifier)
-        }
-    }
     
     /// 执行自定义事件
     internal func implementClickHandle<RootType, ValueType>(withIdentifier identifier: HandleIdentifier<RootType, ValueType>) -> Bool {
@@ -322,6 +300,8 @@ extension RowEntity {
     
     /// 执行自定义事件
     internal func implementCustomHandle<RootType, ValueType>(withIdentifier identifier: HandleIdentifier<RootType, ValueType>) -> Bool {
+        /// 不知道为什么有这个方法打不了包
+        /**
         if let handle: (((ValueType, RowEntity)) -> Void) = handleBox.implement(identifier: identifier) {
             /// 要传到 Block 里去, 弱持有一下
             unowned let shadowSelf = self
@@ -333,8 +313,31 @@ extension RowEntity {
                     return true
                 }
             }
-        }
+        }**/
         return false
+    }
+}
+
+// MARK: - Public method
+extension RowEntity {
+
+    /// 执行 RowEntity 中的 Handle
+    ///
+    /// - Parameter identifier: Handle 的 identifier
+    /// - Returns: Handle 存在并执行成功返回 True, 否则返回 False
+    @discardableResult
+    internal func implementHandle<RootType, ValueType>(withIdentifier identifier: HandleIdentifier<RootType, ValueType>) -> Bool {
+        
+        switch identifier.type {
+        case .click:
+            return implementClickHandle(withIdentifier: identifier)
+            
+        case .verified:
+            return implementVerifiedHandle(withIdentifier: identifier)
+            
+        case .custom:
+            return implementCustomHandle(withIdentifier: identifier)
+        }
     }
     
     /// Reload 该 model 对应的 Cell
