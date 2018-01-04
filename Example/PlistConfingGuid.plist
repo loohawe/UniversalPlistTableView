@@ -15,6 +15,61 @@
 		<array>
 			<dict>
 				<key>identifier</key>
+				<string>discussCellIdentifier</string>
+				<key>accessoryType</key>
+				<integer>0</integer>
+				<key>height</key>
+				<integer>0</integer>
+				<key>title</key>
+				<string>看房体验</string>
+				<key>subTitle</key>
+				<string></string>
+				<key>description</key>
+				<string></string>
+				<key>inputText</key>
+				<string>这里是我的评论那</string>
+				<key>isHidden</key>
+				<false/>
+				<key>isRequired</key>
+				<false/>
+				<key>isClicked</key>
+				<false/>
+				<key>isEditable</key>
+				<true/>
+				<key>keyboardType</key>
+				<integer>0</integer>
+				<key>inputPlaceHolder</key>
+				<string></string>
+				<key>inputVerificationRegex</key>
+				<string>Regular Express String</string>
+				<key>inputVerificationMaxCount</key>
+				<integer>0</integer>
+				<key>inputVerificationDeferedMessage</key>
+				<string></string>
+				<key>commitKey</key>
+				<string>comment</string>
+				<key>leadingIcon</key>
+				<string></string>
+				<key>trailingIcon</key>
+				<string></string>
+				<key>verificationSegue</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<dict>
+		<key>headerTitle</key>
+		<string> </string>
+		<key>headerHeight</key>
+		<real>0.1</real>
+		<key>footerTitle</key>
+		<string> </string>
+		<key>footerHeight</key>
+		<real>0.1</real>
+		<key>rows</key>
+		<array>
+			<dict>
+				<key>identifier</key>
 				<string>titleDescImageCellIdentifier</string>
 				<key>accessoryType</key>
 				<integer>0</integer>
@@ -180,61 +235,6 @@
 				<string></string>
 				<key>verificationSegue</key>
 				<string>AgeGreaterVerifier</string>
-			</dict>
-		</array>
-	</dict>
-	<dict>
-		<key>headerTitle</key>
-		<string> </string>
-		<key>headerHeight</key>
-		<integer>10</integer>
-		<key>footerTitle</key>
-		<string> </string>
-		<key>footerHeight</key>
-		<integer>10</integer>
-		<key>rows</key>
-		<array>
-			<dict>
-				<key>identifier</key>
-				<string>discussCellIdentifier</string>
-				<key>accessoryType</key>
-				<integer>0</integer>
-				<key>height</key>
-				<integer>198</integer>
-				<key>title</key>
-				<string>看房体验</string>
-				<key>subTitle</key>
-				<string></string>
-				<key>description</key>
-				<string></string>
-				<key>inputText</key>
-				<string>这里是我的评论那</string>
-				<key>isHidden</key>
-				<false/>
-				<key>isRequired</key>
-				<false/>
-				<key>isClicked</key>
-				<false/>
-				<key>isEditable</key>
-				<true/>
-				<key>keyboardType</key>
-				<integer>0</integer>
-				<key>inputPlaceHolder</key>
-				<string></string>
-				<key>inputVerificationRegex</key>
-				<string>Regular Express String</string>
-				<key>inputVerificationMaxCount</key>
-				<integer>0</integer>
-				<key>inputVerificationDeferedMessage</key>
-				<string></string>
-				<key>commitKey</key>
-				<string>comment</string>
-				<key>leadingIcon</key>
-				<string></string>
-				<key>trailingIcon</key>
-				<string></string>
-				<key>verificationSegue</key>
-				<string></string>
 			</dict>
 		</array>
 	</dict>

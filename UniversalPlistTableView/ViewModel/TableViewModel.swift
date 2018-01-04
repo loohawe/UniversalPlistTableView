@@ -67,7 +67,7 @@ extension TableViewModel: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let sec = sectionList[section]
-        var sectionHeight: CGFloat = 0
+        var sectionHeight: CGFloat = 0.1
         SectionLoop: for i in 0..<sec.rows.count {
             if !sec.rows[i].isHidden {
                 sectionHeight = CGFloat(sec.headerHeight)
@@ -79,7 +79,7 @@ extension TableViewModel: UITableViewDelegate, UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         let sec = sectionList[section]
-        var sectionHeight: CGFloat = 0
+        var sectionHeight: CGFloat = 0.1
         SectionLoop: for i in 0..<sec.rows.count {
             if !sec.rows[i].isHidden {
                 sectionHeight = CGFloat(sec.footerHeight)
