@@ -111,6 +111,23 @@ extension TableViewModel: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
+        let label = UILabel()
+        label.backgroundColor = UIColor.clear
+        label.textColor = UIColor(red: 102.0/255.0, green: 102.0/255.0, blue: 102.0/255.0, alpha: 1.0)
+        let sec = sectionList[section]
+        label.text = sec.headerTitle.isEmpty ? " " : sec.headerTitle
+        label.font = UIFont.systemFont(ofSize: 13.0)
+        view.addSubview(label)
+        label.snp.makeConstraints { (make) in
+            make.leadingMargin.equalTo(15.0)
+            make.centerY.equalToSuperview()
+        }
+        return view
+    }
+    
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let sec = sectionList[section]
         return sec.headerTitle.isEmpty ? " " : sec.headerTitle
