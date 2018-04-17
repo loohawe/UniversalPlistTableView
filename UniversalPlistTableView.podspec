@@ -15,10 +15,10 @@ Pod::Spec.new do |s|
     Unbelieveable table view, very nice, god damn genius.
                        DESC
 
-  s.homepage         = 'http://git.mogo.com/luhao/UniversalPlistTableView'
+  s.homepage         = 'https://github.com/loohawe/UniversalPlistTableView'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'loohawe@gmail.com' => 'luhao@mogoroom.com' }
-  s.source           = { :git => 'http://git.mogo.com/luhao/UniversalPlistTableView.git', :tag => s.version.to_s }
+  s.author           = { 'loohawe@gmail.com' => 'loohawe@gmail.com' }
+  s.source           = { :git => 'git@github.com:loohawe/UniversalPlistTableView.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
 
